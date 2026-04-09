@@ -1,5 +1,6 @@
 import { Component, input, Output, EventEmitter } from '@angular/core';
 import { Variant, ButtonSize } from '../enums';
+import { BORDER_RADIUS } from '../constants';
 
 @Component({
   selector: 'app-button',
@@ -16,7 +17,7 @@ export class Button {
   @Output() clicked = new EventEmitter<void>();
 
   get classes(): string {
-    const base = 'font-semibold rounded-lg transition-all cursor-pointer inline-flex items-center justify-center';
+    const base = `font-semibold ${BORDER_RADIUS.sm} transition-all cursor-pointer inline-flex items-center justify-center`;
 
     const sizes: Record<string, string> = {
       sm: 'text-xs px-3 py-1.5',

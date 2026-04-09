@@ -1,12 +1,15 @@
 import { Component, computed, input, signal } from '@angular/core';
 
 import { Variant, TooltipPosition, TooltipTrigger } from '../enums';
+import { BORDER_RADIUS } from '../constants';
 
 @Component({
   selector: 'app-tooltip',
   templateUrl: './tooltip.html',
 })
 export class Tooltip {
+  radius = BORDER_RADIUS;
+
   // Inputs
   text = input<string>('');
   position = input<TooltipPosition>(TooltipPosition.Top);

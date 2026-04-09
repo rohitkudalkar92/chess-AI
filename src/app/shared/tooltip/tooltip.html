@@ -12,7 +12,7 @@
       role="tooltip"
       class="absolute z-50 pointer-events-none whitespace-nowrap animate-in fade-in duration-150"
       [class]="positionClasses">
-      <div class="text-xs font-medium px-3 py-1.5 rounded-lg shadow-lg relative" [class]="variantClasses">
+      <div class="text-xs font-medium px-3 py-1.5 shadow-lg relative" [class]="variantClasses + ' ' + radius.sm">
         @if (text()) {
           {{ text() }}
         } @else {

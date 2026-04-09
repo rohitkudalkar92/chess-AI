@@ -1,19 +1,20 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Button } from '../shared/button/button';
 import { Tooltip } from '../shared/tooltip/tooltip';
 import { Variant, TooltipPosition } from '../shared/enums';
 import { NavMenu } from '../shared/interfaces';
+import { BORDER_RADIUS } from '../shared/constants';
 import { ThemeService } from '../shared/services/theme';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, Button, Tooltip],
+  imports: [RouterLink, Tooltip],
   templateUrl: './navbar.html',
 })
 export class Navbar {
   Variant = Variant;
   TooltipPosition = TooltipPosition;
+  radius = BORDER_RADIUS;
   themeService = inject(ThemeService);
 
   navMenus: NavMenu[] = [
@@ -97,5 +98,9 @@ export class Navbar {
 
   isExternal(route: string): boolean {
     return route.startsWith('http');
+  }
+
+  get themeToggleLabel(): string {
+    return this.themeService.isDark() ? 'Switch to light mode' : 'Switch to dark mode';
   }
 }
