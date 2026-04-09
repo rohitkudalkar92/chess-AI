@@ -2,9 +2,9 @@
   <div class="flex flex-col lg:flex-row gap-6 items-start justify-center">
 
     <!-- Players (left) -->
-    <div class="flex flex-col gap-3 lg:self-center">
-      <app-player-card [player]="opponent" time="08:32" [isActive]="false" />
-      <app-player-card [player]="player" time="09:15" [isActive]="true" />
+    <div class="flex flex-col gap-8 lg:self-center">
+      <app-player-card [player]="opponent" [time]="formatTime(opponentTime())" [isActive]="!isPlayerTurn()" />
+      <app-player-card [player]="player" [time]="formatTime(playerTime())" [isActive]="isPlayerTurn()" />
     </div>
 
     <!-- Board (center) -->
@@ -18,7 +18,6 @@
         (drawOffer)="onDrawOffer()"
         (rematch)="onRematch()" />
       <app-move-history [moves]="moves" />
-      
     </aside>
 
   </div>

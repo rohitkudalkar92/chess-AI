@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, OnInit, OnDestroy } from '@angular/core';
 
 import { ChessBoard } from '../../shared/chess-board/chess-board';
 import { PlayerCard } from '../../shared/player-card/player-card';
@@ -13,7 +13,7 @@ import { Variant } from '../../shared/enums';
   imports: [ChessBoard, PlayerCard, MoveHistory, GameControls, GameInfo],
   templateUrl: './online-game.html',
 })
-export class OnlineGame {
+export class OnlineGame implements OnInit, OnDestroy {
   gameInfoItems: GameInfoItem[] = [
     { icon: '⏱', label: 'Rapid · 15 min' },
     { icon: '🌐', label: 'Online Match' },
@@ -43,6 +43,41 @@ export class OnlineGame {
     { number: 4, white: 'Ba4', black: 'Nf6' },
     { number: 5, white: 'O-O' },
   ];
+
+  isPlayerTurn = signal(true);
+  playerTime = signal(900);
+  opponentTime = signal(900);
+
+  private _timerInterval: ReturnType<typeof setInterval> | null = null;
+  private _switchInterval: ReturnType<typeof setInterval> | null = null;
+  private _moveSound = new Audio('assets/mp3/move.mp3');
+
+  ngOnInit(): void {
+    this._timerInterval = setInterval(() => {
+      if (this.isPlayerTurn()) {
+        this.playerTime.update(t => Math.max(0, t - 1));
+      } else {
+        this.opponentTime.update(t => Math.max(0, t - 1));
+      }
+    }, 1000);
+
+    this._switchInterval = setInterval(() => {
+      this.isPlayerTurn.update(v => !v);
+      this._moveSound.currentTime = 0;
+      this._moveSound.play();
+    }, 5000);
+  }
+
+  ngOnDestroy(): void {
+    if (this._timerInterval) clearInterval(this._timerInterval);
+    if (this._switchInterval) clearInterval(this._switchInterval);
+  }
+
+  formatTime(seconds: number): string {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  }
 
   onResign(): void {
     console.log('Resigned');
