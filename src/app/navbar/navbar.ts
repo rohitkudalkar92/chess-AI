@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Tooltip } from '../shared/tooltip/tooltip';
 import { Variant, TooltipPosition } from '../shared/enums';
@@ -16,6 +16,8 @@ export class Navbar {
   TooltipPosition = TooltipPosition;
   radius = BORDER_RADIUS;
   themeService = inject(ThemeService);
+
+  activeMenu = signal<string | null>(null);
 
   navMenus: NavMenu[] = [
     {
@@ -95,6 +97,22 @@ export class Navbar {
       ],
     },
   ];
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('app-navbar')) {
+      this.closeMenu();
+    }
+  }
+
+  toggleMenu(label: string): void {
+    this.activeMenu.set(this.activeMenu() === label ? null : label);
+  }
+
+  closeMenu(): void {
+    this.activeMenu.set(null);
+  }
 
   isExternal(route: string): boolean {
     return route.startsWith('http');
