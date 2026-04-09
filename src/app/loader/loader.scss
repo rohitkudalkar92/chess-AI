@@ -1,0 +1,10 @@
+@keyframes loader {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+:host {
+  .animate-loader {
+    animation: loader 2s ease-in-out infinite;
+  }
+}

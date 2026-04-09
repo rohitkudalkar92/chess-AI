@@ -1,0 +1,14 @@
+<section class="fixed inset-0 z-[100] bg-gray-950 flex flex-col items-center justify-center gap-6">
+  <!-- Animated chess piece -->
+  <img [src]="currentPiece()" alt="Loading chess piece" class="w-20 h-20 animate-bounce" />
+
+  <!-- Title -->
+  <h2 class="text-white text-xl font-semibold tracking-wide">Chess AI</h2>
+
+  <!-- Progress bar -->
+  <div class="w-48 h-1 bg-gray-800 rounded-full overflow-hidden">
+    <div class="h-full bg-amber-500 rounded-full animate-loader"></div>
+  </div>
+
+  <p class="text-gray-500 text-sm">Preparing your board...</p>
+</section>

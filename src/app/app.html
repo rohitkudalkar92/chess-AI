@@ -1,2 +1,6 @@
-<app-navbar />
-<router-outlet />
+@if (loading()) {
+  <app-loader />
+} @else {
+  <app-navbar />
+  <router-outlet />
+}
