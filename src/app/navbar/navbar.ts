@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Button } from '../shared/button/button';
 import { Variant } from '../shared/enums';
+import { ThemeService } from '../shared/services/theme';
 
 @Component({
   selector: 'app-navbar',
@@ -10,4 +11,5 @@ import { Variant } from '../shared/enums';
 })
 export class Navbar {
   Variant = Variant;
+  themeService = inject(ThemeService);
 }
