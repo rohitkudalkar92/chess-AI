@@ -8,3 +8,16 @@ export enum ButtonSize {
   Md = 'md',
   Lg = 'lg',
 }
+
+export enum TooltipPosition {
+  Top = 'top',
+  Bottom = 'bottom',
+  Left = 'left',
+  Right = 'right',
+}
+
+export enum TooltipTrigger {
+  Hover = 'hover',
+  Focus = 'focus',
+  Both = 'both',
+}

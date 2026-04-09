@@ -1,0 +1,25 @@
+<div
+  class="relative inline-block"
+  (mouseenter)="isHoverTrigger && show()"
+  (mouseleave)="isHoverTrigger && hide()"
+  (focusin)="isFocusTrigger && show()"
+  (focusout)="isFocusTrigger && hide()">
+
+  <ng-content />
+
+  @if (isVisible) {
+    <div
+      role="tooltip"
+      class="absolute z-50 pointer-events-none whitespace-nowrap animate-in fade-in duration-150"
+      [class]="positionClasses">
+      <div class="text-xs font-medium px-3 py-1.5 rounded-lg shadow-lg relative" [class]="variantClasses">
+        @if (text()) {
+          {{ text() }}
+        } @else {
+          <ng-content select="[tooltip-content]" />
+        }
+        <span class="absolute border-4" [class]="arrowClasses"></span>
+      </div>
+    </div>
+  }
+</div>

@@ -16,112 +16,54 @@
           <a routerLink="/" class="px-5 py-2 rounded-lg text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100 transition-all inline-block">Home</a>
         </li>
 
-        <!-- Play -->
-        <li class="relative group">
-          <button class="px-5 py-2 rounded-lg text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100 transition-all cursor-pointer flex items-center gap-1">
-            Play
-            <svg class="w-3.5 h-3.5 mt-0.5 opacity-50 group-hover:opacity-100 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute left-1/2 -translate-x-1/2 top-full pt-3">
-            <div class="bg-white text-gray-800 rounded-xl shadow-2xl border border-gray-100 p-8 w-[620px] grid grid-cols-3 gap-8">
-              <div>
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Game Modes</h3>
-                <ul class="space-y-1 list-none p-0 m-0">
-                  <li><a routerLink="/play/vs-ai" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">♟ <span>Play vs AI</span></a></li>
-                  <li><a routerLink="/play/local" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">👥 <span>Local Match</span></a></li>
-                  <li><a routerLink="/play/online" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">🌐 <span>Online Match</span></a></li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Difficulty</h3>
-                <ul class="space-y-1 list-none p-0 m-0">
-                  <li><a routerLink="/play/easy" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-green-50 transition text-sm text-gray-700 hover:text-green-700">🟢 <span>Easy</span></a></li>
-                  <li><a routerLink="/play/medium" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-amber-50 transition text-sm text-gray-700 hover:text-amber-700">🟡 <span>Medium</span></a></li>
-                  <li><a routerLink="/play/hard" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-red-50 transition text-sm text-gray-700 hover:text-red-700">🔴 <span>Hard</span></a></li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Time Controls</h3>
-                <ul class="space-y-1 list-none p-0 m-0">
-                  <li><a routerLink="/play/bullet" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">⚡ <span>Bullet · 1 min</span></a></li>
-                  <li><a routerLink="/play/blitz" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">🔥 <span>Blitz · 5 min</span></a></li>
-                  <li><a routerLink="/play/rapid" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">⏱ <span>Rapid · 15 min</span></a></li>
-                </ul>
+        @for (menu of navMenus; track menu.label) {
+          <li class="relative group">
+            <button class="px-5 py-2 rounded-lg text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100 transition-all cursor-pointer flex items-center gap-1">
+              {{ menu.label }}
+              <svg class="w-3.5 h-3.5 mt-0.5 opacity-50 group-hover:opacity-100 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute top-full pt-3" [class]="menu.align === 'right' ? 'right-0' : 'left-1/2 -translate-x-1/2'">
+              <div class="bg-white text-gray-800 rounded-b-xl shadow-2xl border border-gray-100 p-8 grid gap-8" [class]="menu.width + ' ' + menu.cols">
+                @for (section of menu.sections; track section.title) {
+                  <div>
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">{{ section.title }}</h3>
+                    <ul class="space-y-1 list-none p-0 m-0">
+                      @for (link of section.links; track link.route) {
+                        <li>
+                          @if (isExternal(link.route)) {
+                            <a [href]="link.route" target="_blank" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900" [class]="link.hoverClass ?? ''">
+                              {{ link.icon }} <span>{{ link.label }}</span>
+                            </a>
+                          } @else {
+                            <a [routerLink]="link.route" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900" [class]="link.hoverClass ?? ''">
+                              {{ link.icon }} <span>{{ link.label }}</span>
+                            </a>
+                          }
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                }
               </div>
             </div>
-          </div>
-        </li>
-
-        <!-- Learn -->
-        <li class="relative group">
-          <button class="px-5 py-2 rounded-lg text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100 transition-all cursor-pointer flex items-center gap-1">
-            Learn
-            <svg class="w-3.5 h-3.5 mt-0.5 opacity-50 group-hover:opacity-100 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute left-1/2 -translate-x-1/2 top-full pt-3">
-            <div class="bg-white text-gray-800 rounded-xl shadow-2xl border border-gray-100 p-8 w-[480px] grid grid-cols-2 gap-8">
-              <div>
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Tutorials</h3>
-                <ul class="space-y-1 list-none p-0 m-0">
-                  <li><a routerLink="/learn/basics" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">📖 <span>Chess Basics</span></a></li>
-                  <li><a routerLink="/learn/openings" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">🏁 <span>Openings</span></a></li>
-                  <li><a routerLink="/learn/endgames" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">🏆 <span>Endgames</span></a></li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Practice</h3>
-                <ul class="space-y-1 list-none p-0 m-0">
-                  <li><a routerLink="/learn/puzzles" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">🧩 <span>Puzzles</span></a></li>
-                  <li><a routerLink="/learn/tactics" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">⚔️ <span>Tactics Trainer</span></a></li>
-                  <li><a routerLink="/learn/analysis" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">📊 <span>Game Analysis</span></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <!-- About -->
-        <li class="relative group">
-          <button class="px-5 py-2 rounded-lg text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100 transition-all cursor-pointer flex items-center gap-1">
-            About
-            <svg class="w-3.5 h-3.5 mt-0.5 opacity-50 group-hover:opacity-100 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </button>
-          <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute right-0 top-full pt-3">
-            <div class="bg-white text-gray-800 rounded-xl shadow-2xl border border-gray-100 p-8 w-[380px] grid grid-cols-2 gap-8">
-              <div>
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Project</h3>
-                <ul class="space-y-1 list-none p-0 m-0">
-                  <li><a routerLink="/about" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">ℹ️ <span>About Us</span></a></li>
-                  <li><a routerLink="/about/tech" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">🛠 <span>Tech Stack</span></a></li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Community</h3>
-                <ul class="space-y-1 list-none p-0 m-0">
-                  <li><a href="https://github.com" target="_blank" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">🐙 <span>GitHub</span></a></li>
-                  <li><a routerLink="/contact" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 transition text-sm text-gray-700 hover:text-gray-900">📬 <span>Contact</span></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
+          </li>
+        }
       </ul>
 
       <!-- Theme Toggle & CTA -->
       <div class="flex items-center gap-3">
-        <button
-          (click)="themeService.toggleTheme()"
-          [attr.aria-label]="themeService.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
-          class="p-2 rounded-lg text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100 transition-all cursor-pointer">
-          @if (themeService.isDark()) {
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-          } @else {
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-          }
-        </button>
-        <a routerLink="/play/vs-ai">
-          <app-button [variant]="Variant.White">Play Now</app-button>
-        </a>
+        <app-tooltip [text]="themeService.isDark() ? 'Switch to light mode' : 'Switch to dark mode'" [position]="TooltipPosition.Bottom" [variant]="themeService.isDark() ? Variant.White : Variant.Black">
+          <button
+            (click)="themeService.toggleTheme()"
+            [attr.aria-label]="themeService.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+            class="p-2 rounded-full text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100 transition-all cursor-pointer ring-1 ring-inset ring-gray-300 dark:ring-gray-700">
+            @if (themeService.isDark()) {
+              <img src="assets/icons/black-king.svg" alt="Switch to light mode" class="w-5 h-5" />
+            } @else {
+              <img src="assets/icons/white-king.svg" alt="Switch to dark mode" class="w-5 h-5" />
+            }
+          </button>
+        </app-tooltip>
       </div>
 
     </div>
