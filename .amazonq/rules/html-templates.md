@@ -1,0 +1,8 @@
+- Use Angular 21+ template syntax with @if, @for, @switch control flow blocks instead of *ngIf, *ngFor, *ngSwitch
+- Use Tailwind CSS utility classes for all styling — avoid inline styles and custom CSS unless absolutely necessary
+- Keep templates clean and readable — extract complex logic into the component TypeScript file
+- Use semantic HTML elements (nav, main, section, article, header, footer) over generic divs
+- All images and icons must have alt attributes for accessibility
+- Use routerLink for internal navigation, href only for external links
+- Interactive elements must be keyboard accessible with proper aria attributes
+- Keep templates under 150 lines — split into child components if larger
