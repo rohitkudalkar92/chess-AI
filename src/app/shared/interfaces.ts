@@ -1,3 +1,5 @@
+import { PieceType, Variant } from './enums';
+
 export interface NavLink {
   icon: string;
   label: string;
@@ -12,8 +14,36 @@ export interface NavSection {
 
 export interface NavMenu {
   label: string;
-  width: string;
   cols: string;
-  align?: 'center' | 'right';
   sections: NavSection[];
+}
+
+export interface PlayerStats {
+  wins: number;
+  losses: number;
+  draws: number;
+}
+
+export interface Player {
+  name: string;
+  rating: number;
+  avatar: string;
+  color: Variant;
+  stats: PlayerStats;
+}
+
+export interface ChessPiece {
+  color: Variant;
+  type: PieceType;
+}
+
+export interface GameInfoItem {
+  icon: string;
+  label: string;
+}
+
+export interface Move {
+  number: number;
+  white: string;
+  black?: string;
 }

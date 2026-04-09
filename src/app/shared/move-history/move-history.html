@@ -1,0 +1,16 @@
+<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 overflow-hidden" [class]="radius.md">
+  <header class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+    <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Moves</h3>
+  </header>
+  <div class="max-h-80 overflow-y-auto p-2">
+    @for (move of moves(); track move.number) {
+      <div class="flex items-center text-sm py-1 px-2" [class]="(move.number % 2 === 0 ? 'bg-gray-50 dark:bg-gray-700/50' : '') + ' ' + radius.md">
+        <span class="w-8 text-gray-400 dark:text-gray-500 font-mono text-xs">{{ move.number }}.</span>
+        <span class="w-20 text-gray-900 dark:text-white font-medium">{{ move.white }}</span>
+        <span class="w-20 text-gray-900 dark:text-white font-medium">{{ move.black ?? '' }}</span>
+      </div>
+    } @empty {
+      <p class="text-center text-gray-400 dark:text-gray-500 text-sm py-8">No moves yet</p>
+    }
+  </div>
+</div>

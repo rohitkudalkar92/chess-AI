@@ -4,6 +4,7 @@ export enum Variant {
 }
 
 export enum ButtonSize {
+  Xs = 'xs',
   Sm = 'sm',
   Md = 'md',
   Lg = 'lg',
@@ -20,4 +21,13 @@ export enum TooltipTrigger {
   Hover = 'hover',
   Focus = 'focus',
   Both = 'both',
+}
+
+export enum PieceType {
+  King = 'king',
+  Queen = 'queen',
+  Bishop = 'bishop',
+  Knight = 'knight',
+  Rook = 'rook',
+  Pawn = 'pawn',
 }

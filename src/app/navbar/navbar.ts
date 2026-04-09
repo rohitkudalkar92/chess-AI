@@ -22,7 +22,6 @@ export class Navbar {
   navMenus: NavMenu[] = [
     {
       label: 'Play',
-      width: 'w-[620px]',
       cols: 'grid-cols-3',
       sections: [
         {
@@ -53,7 +52,6 @@ export class Navbar {
     },
     {
       label: 'Learn',
-      width: 'w-[480px]',
       cols: 'grid-cols-2',
       sections: [
         {
@@ -76,9 +74,7 @@ export class Navbar {
     },
     {
       label: 'About',
-      width: 'w-[380px]',
       cols: 'grid-cols-2',
-      align: 'right',
       sections: [
         {
           title: 'Project',
@@ -98,6 +94,45 @@ export class Navbar {
     },
   ];
 
+  get navClasses(): string {
+    return `bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 dark:bg-none dark:bg-white text-white dark:text-gray-900 border border-gray-800 dark:border-gray-200 shadow-lg shadow-black/20 dark:shadow-black/5 transition-colors duration-200 ${this.radius.md}`;
+  }
+
+  get homeLinkClasses(): string {
+    return `px-5 py-2 text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100 transition-all inline-block ${this.radius.md}`;
+  }
+
+  get themeToggleLabel(): string {
+    return this.themeService.isDark() ? 'Switch to light mode' : 'Switch to dark mode';
+  }
+
+  get themeButtonClasses(): string {
+    return `p-2 transition-all cursor-pointer ring-1 ring-inset bg-white dark:bg-gray-900 ring-gray-200 dark:ring-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 ${this.radius.md}`;
+  }
+
+  get panelClasses(): string {
+    return `absolute left-0 right-0 top-full mt-2 mx-4 border border-gray-800 dark:border-gray-200 bg-gray-950 dark:bg-white px-8 py-6 shadow-2xl shadow-black/30 dark:shadow-black/10 animate-slide-down ${this.radius.md}`;
+  }
+
+  menuButtonClasses(label: string): string {
+    const active = 'text-white dark:text-gray-900 bg-white/15 dark:bg-gray-100';
+    const inactive = 'text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100';
+    const state = this.activeMenu() === label ? active : inactive;
+    return `px-5 py-2 transition-all cursor-pointer flex items-center gap-1 ${state} ${this.radius.md}`;
+  }
+
+  chevronClasses(label: string): string {
+    return `w-3.5 h-3.5 mt-0.5 transition-transform duration-200 ${this.activeMenu() === label ? 'rotate-180' : ''}`;
+  }
+
+  themeIconClasses(visible: boolean): string {
+    return `w-5 h-5 absolute inset-0 transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`;
+  }
+
+  linkClasses(hoverClass?: string): string {
+    return `flex items-center gap-3 px-3 py-2.5 text-sm text-gray-300 dark:text-gray-600 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-200/60 transition-all ${hoverClass ?? ''} ${this.radius.md}`;
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
@@ -116,9 +151,5 @@ export class Navbar {
 
   isExternal(route: string): boolean {
     return route.startsWith('http');
-  }
-
-  get themeToggleLabel(): string {
-    return this.themeService.isDark() ? 'Switch to light mode' : 'Switch to dark mode';
   }
 }

@@ -7,7 +7,6 @@ import { Loader } from './loader/loader';
   selector: 'app-root',
   imports: [RouterOutlet, Navbar, Loader],
   templateUrl: './app.html',
-  styleUrl: './app.scss',
 })
 export class App implements OnInit {
   loading = signal(true);

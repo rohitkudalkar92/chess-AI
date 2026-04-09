@@ -1,5 +1,5 @@
 <div class="max-w-7xl mx-auto px-4 mt-5 relative z-50">
-  <nav class="bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 dark:bg-none dark:bg-white text-white dark:text-gray-900 border border-gray-800 dark:border-gray-200 shadow-lg shadow-black/20 dark:shadow-black/5 transition-colors duration-200" [class]="radius.lg">
+  <nav [class]="navClasses">
 
     <!-- Top bar -->
     <div class="flex items-center justify-between px-8 py-3">
@@ -13,23 +13,14 @@
       <!-- Nav Links -->
       <ul class="flex gap-0 list-none m-0 p-0 text-sm font-medium">
         <li>
-          <a routerLink="/" (click)="closeMenu()" class="px-5 py-2 text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100 transition-all inline-block" [class]="radius.sm">Home</a>
+          <a routerLink="/" (click)="closeMenu()" [class]="homeLinkClasses">Home</a>
         </li>
 
         @for (menu of navMenus; track menu.label) {
           <li>
-            <button
-              (click)="toggleMenu(menu.label)"
-              class="px-5 py-2 transition-all cursor-pointer flex items-center gap-1"
-              [class]="(activeMenu() === menu.label
-                ? 'text-white dark:text-gray-900 bg-white/15 dark:bg-gray-100'
-                : 'text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100')
-                + ' ' + radius.sm">
+            <button (click)="toggleMenu(menu.label)" [class]="menuButtonClasses(menu.label)">
               {{ menu.label }}
-              <svg
-                class="w-3.5 h-3.5 mt-0.5 transition-transform duration-200"
-                [class]="activeMenu() === menu.label ? 'rotate-180' : ''"
-                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg [class]="chevronClasses(menu.label)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
               </svg>
             </button>
@@ -40,13 +31,10 @@
       <!-- Theme Toggle -->
       <div class="flex items-center gap-3">
         <app-tooltip [text]="themeToggleLabel" [position]="TooltipPosition.Bottom" [variant]="themeService.isDark() ? Variant.White : Variant.Black">
-          <button
-            (click)="themeService.toggleTheme()"
-            [attr.aria-label]="themeToggleLabel"
-            class="p-2 transition-all cursor-pointer ring-1 ring-inset bg-white dark:bg-gray-900 ring-gray-200 dark:ring-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800" [class]="radius.full">
+          <button (click)="themeService.toggleTheme()" [attr.aria-label]="themeToggleLabel" [class]="themeButtonClasses">
             <span class="relative w-5 h-5 block">
-              <img src="assets/icons/white-king.svg" alt="Switch to light mode" class="w-5 h-5 absolute inset-0 transition-opacity duration-300" [class]="themeService.isDark() ? 'opacity-100' : 'opacity-0'" />
-              <img src="assets/icons/black-king.svg" alt="Switch to dark mode" class="w-5 h-5 absolute inset-0 transition-opacity duration-300" [class]="themeService.isDark() ? 'opacity-0' : 'opacity-100'" />
+              <img src="assets/icons/white-king.svg" alt="Switch to light mode" [class]="themeIconClasses(themeService.isDark())" />
+              <img src="assets/icons/black-king.svg" alt="Switch to dark mode" [class]="themeIconClasses(!themeService.isDark())" />
             </span>
           </button>
         </app-tooltip>
@@ -57,7 +45,7 @@
     <!-- Expanding Mega Panel -->
     @for (menu of navMenus; track menu.label) {
       @if (activeMenu() === menu.label) {
-        <div class="absolute left-0 right-0 top-full mt-2 mx-4 border border-gray-800 dark:border-gray-200 bg-gray-950 dark:bg-white px-8 py-6 shadow-2xl shadow-black/30 dark:shadow-black/10 animate-slide-down" [class]="radius.lg">
+        <div [class]="panelClasses">
           <div class="grid gap-8" [class]="menu.cols">
             @for (section of menu.sections; track section.title) {
               <div>
@@ -66,12 +54,12 @@
                   @for (link of section.links; track link.route) {
                     <li>
                       @if (isExternal(link.route)) {
-                        <a [href]="link.route" target="_blank" (click)="closeMenu()" class="flex items-center gap-3 px-3 py-2.5 text-sm text-gray-300 dark:text-gray-600 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-200/60 transition-all" [class]="(link.hoverClass ?? '') + ' ' + radius.sm">
+                        <a [href]="link.route" target="_blank" (click)="closeMenu()" [class]="linkClasses(link.hoverClass)">
                           <span class="text-lg">{{ link.icon }}</span>
                           <span>{{ link.label }}</span>
                         </a>
                       } @else {
-                        <a [routerLink]="link.route" (click)="closeMenu()" class="flex items-center gap-3 px-3 py-2.5 text-sm text-gray-300 dark:text-gray-600 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-200/60 transition-all" [class]="(link.hoverClass ?? '') + ' ' + radius.sm">
+                        <a [routerLink]="link.route" (click)="closeMenu()" [class]="linkClasses(link.hoverClass)">
                           <span class="text-lg">{{ link.icon }}</span>
                           <span>{{ link.label }}</span>
                         </a>

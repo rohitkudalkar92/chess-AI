@@ -1,0 +1,22 @@
+<div [class]="boardClasses">
+  @for (row of ranks; track row; let r = $index) {
+    <div class="flex">
+      @for (file of files; track file; let c = $index) {
+        <div [class]="cellClasses(r, c)">
+
+          @if (r === 7) {
+            <span class="bottom-0.5 right-1" [class]="labelClasses(r, c)">{{ file }}</span>
+          }
+
+          @if (c === 0) {
+            <span class="top-0.5 left-1" [class]="labelClasses(r, c)">{{ row }}</span>
+          }
+
+          @if (board[r][c]; as piece) {
+            <img [src]="getPieceImage(piece)" [alt]="piece.color + ' ' + piece.type" class="w-14 h-14 drop-shadow-md transition-transform hover:scale-110" />
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

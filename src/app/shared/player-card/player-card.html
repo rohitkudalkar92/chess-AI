@@ -1,0 +1,48 @@
+<div [class]="containerClasses">
+
+  <!-- Avatar -->
+  <div class="relative">
+    <div class="w-20 h-20 flex items-center justify-center" [class]="avatarBgClasses">
+      <img [src]="player().avatar" [alt]="player().name + ' avatar'" class="w-14 h-14" />
+    </div>
+    @if (isActive()) {
+      <span [class]="statusDotClasses"></span>
+    }
+  </div>
+
+  <!-- Name + Color -->
+  <div class="text-center">
+    <p class="font-bold text-gray-900 dark:text-white text-base">{{ player().name }}</p>
+    <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{{ colorLabel }}</p>
+  </div>
+
+  <!-- Rating -->
+  <div class="flex items-center gap-1.5 text-sm font-semibold text-amber-600 dark:text-amber-400">
+    <span>⭐</span>
+    <span>{{ ratingLabel }}</span>
+  </div>
+
+  <!-- Stats -->
+  <div class="flex gap-3 text-center text-xs w-full">
+    <div class="flex-1 bg-green-50 dark:bg-green-500/10 py-2" [class]="radius.md">
+      <p class="font-bold text-green-600 dark:text-green-400">{{ player().stats.wins }}</p>
+      <p class="text-gray-500 dark:text-gray-400">W</p>
+    </div>
+    <div class="flex-1 bg-red-50 dark:bg-red-500/10 py-2" [class]="radius.md">
+      <p class="font-bold text-red-600 dark:text-red-400">{{ player().stats.losses }}</p>
+      <p class="text-gray-500 dark:text-gray-400">L</p>
+    </div>
+    <div class="flex-1 bg-gray-50 dark:bg-gray-700/50 py-2" [class]="radius.md">
+      <p class="font-bold text-gray-600 dark:text-gray-300">{{ player().stats.draws }}</p>
+      <p class="text-gray-500 dark:text-gray-400">D</p>
+    </div>
+  </div>
+
+  <!-- Timer -->
+  <div [class]="timerClasses">{{ time() }}</div>
+
+  <!-- Status -->
+  @if (isActive()) {
+    <span class="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider">⏳ Thinking...</span>
+  }
+</div>

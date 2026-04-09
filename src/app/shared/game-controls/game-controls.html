@@ -1,0 +1,5 @@
+<div class="flex gap-2">
+  <app-button [variant]="Variant.White" [size]="ButtonSize.Md" (clicked)="resign.emit()">🏳️ Resign</app-button>
+  <app-button [variant]="Variant.White" [size]="ButtonSize.Md" (clicked)="drawOffer.emit()">🤝 Draw</app-button>
+  <app-button [variant]="Variant.White" [size]="ButtonSize.Md" (clicked)="rematch.emit()">🔄 Rematch</app-button>
+</div>
