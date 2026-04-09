@@ -1,0 +1,63 @@
+<!-- Hero Section -->
+<section class="relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 pt-24 pb-32 flex flex-col items-center text-center">
+    <span class="text-7xl mb-6">♚</span>
+    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
+      Master Chess with
+      <span class="text-gradient-shimmer">AI</span>
+    </h1>
+    <p class="mt-6 text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-2xl">
+      Play against intelligent opponents, learn winning strategies, and sharpen your skills — all in your browser.
+    </p>
+    <div class="mt-10 flex gap-4">
+      <a routerLink="/play/vs-ai">
+        <app-button [variant]="Variant.Black" [size]="ButtonSize.Lg">Play vs AI</app-button>
+      </a>
+      <a routerLink="/learn/basics">
+        <app-button [variant]="Variant.White" [size]="ButtonSize.Lg">Learn Chess</app-button>
+      </a>
+    </div>
+  </div>
+
+  <!-- Decorative chess pieces -->
+  <div class="absolute top-16 left-10 text-8xl opacity-5 dark:opacity-[0.03] select-none pointer-events-none" aria-hidden="true">♜</div>
+  <div class="absolute bottom-10 right-10 text-9xl opacity-5 dark:opacity-[0.03] select-none pointer-events-none" aria-hidden="true">♞</div>
+</section>
+
+<!-- Features Section -->
+<section class="bg-gray-50 dark:bg-gray-800/50 py-24 transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Why Play Here?</h2>
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Everything you need to play, learn, and master chess — powered by AI.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      @for (feature of features; track feature.title) {
+        <article class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-shadow duration-200">
+          <span class="text-4xl block mb-4">{{ feature.icon }}</span>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{{ feature.title }}</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{ feature.description }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-24">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">How It Works</h2>
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Get started in three simple steps.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      @for (step of steps; track step.number) {
+        <article class="relative text-center p-8">
+          <span class="text-6xl font-black text-gradient-shimmer block mb-2">{{ step.number }}</span>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{{ step.title }}</h3>
+          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{ step.description }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
