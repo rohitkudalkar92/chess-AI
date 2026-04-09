@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 
 import { Button } from '../shared/button/button';
 import { Variant, ButtonSize } from '../shared/enums';
+import { BORDER_RADIUS } from '../shared/constants';
 
 interface Feature {
   icon: string;
@@ -24,6 +25,7 @@ interface Step {
 export class Landing {
   Variant = Variant;
   ButtonSize = ButtonSize;
+  radius = BORDER_RADIUS;
 
   features: Feature[] = [
     {

@@ -1,4 +1,5 @@
 import { Component, signal, OnInit, OnDestroy } from '@angular/core';
+import { APP_NAME, LOADER_MESSAGE, BORDER_RADIUS } from '../shared/constants';
 
 @Component({
   selector: 'app-loader',
@@ -7,6 +8,10 @@ import { Component, signal, OnInit, OnDestroy } from '@angular/core';
   styleUrl: './loader.scss',
 })
 export class Loader implements OnInit, OnDestroy {
+  appName = APP_NAME;
+  loaderMessage = LOADER_MESSAGE;
+  radius = BORDER_RADIUS;
+
   private _pieces = [
     'assets/icons/white-king.svg',
     'assets/icons/white-queen.svg',

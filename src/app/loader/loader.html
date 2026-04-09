@@ -3,12 +3,12 @@
   <img [src]="currentPiece()" alt="Loading chess piece" class="w-20 h-20 animate-bounce" />
 
   <!-- Title -->
-  <h2 class="text-white text-xl font-semibold tracking-wide">Chess AI</h2>
+  <h2 class="text-white text-xl font-semibold tracking-wide">{{ appName }}</h2>
 
   <!-- Progress bar -->
-  <div class="w-48 h-1 bg-gray-800 rounded-full overflow-hidden">
-    <div class="h-full bg-amber-500 rounded-full animate-loader"></div>
+  <div class="w-48 h-1 bg-gray-800 overflow-hidden" [class]="radius.full">
+    <div class="h-full bg-amber-500 animate-loader" [class]="radius.full"></div>
   </div>
 
-  <p class="text-gray-500 text-sm">Preparing your board...</p>
+  <p class="text-gray-500 text-sm">{{ loaderMessage }}</p>
 </section>

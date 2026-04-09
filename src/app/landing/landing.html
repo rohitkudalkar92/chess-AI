@@ -33,7 +33,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       @for (feature of features; track feature.title) {
-        <article class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-shadow duration-200">
+        <article class="bg-white dark:bg-gray-900 p-8 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-shadow duration-200" [class]="radius.lg">
           <span class="text-4xl block mb-4">{{ feature.icon }}</span>
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{{ feature.title }}</h3>
           <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{ feature.description }}</p>
