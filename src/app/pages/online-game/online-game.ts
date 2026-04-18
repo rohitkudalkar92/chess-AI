@@ -62,6 +62,7 @@ export class OnlineGame implements OnInit, OnDestroy {
   activeModal = signal<ModalAction>(null);
 
   private _timerInterval: ReturnType<typeof setInterval> | null = null;
+  private _gameStarted = false;
 
   private _modalConfigs: Record<string, ModalConfig> = {
     resign: { icon: '🏳️', iconType: 'emoji', title: 'Resign Game?', message: 'You will lose this game. This action cannot be undone.', confirmLabel: 'Resign' },
@@ -77,6 +78,11 @@ export class OnlineGame implements OnInit, OnDestroy {
   ngOnInit(): void {
     this._timerInterval = setInterval(() => {
       if (this._game.gameOver()) return;
+
+      if (!this._gameStarted) {
+        if (this._game.moveHistory().length > 0) this._gameStarted = true;
+        else return;
+      }
 
       if (this.isWhiteTurn) {
         this.playerTime.update(t => Math.max(0, t - 1));
