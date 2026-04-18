@@ -12,6 +12,7 @@ export interface NavSection {
 
 export interface NavMenu {
   label: string;
-  cols: string;
-  sections: NavSection[];
+  route?: string;
+  cols?: string;
+  sections?: NavSection[];
 }

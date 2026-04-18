@@ -1,6 +1,6 @@
 <div class="flex gap-2 flex-wrap">
-  <app-button [variant]="Variant.White" [size]="ButtonSize.Md" (clicked)="resign.emit()">🏳️ Resign</app-button>
-  <app-button [variant]="Variant.White" [size]="ButtonSize.Md" (clicked)="drawOffer.emit()"><img src="assets/icons/handshake-daark.svg" alt="Draw" class="w-4 h-4 inline-block mr-1" /> Draw</app-button>
-  <app-button [variant]="Variant.White" [size]="ButtonSize.Md" (clicked)="rematch.emit()">🔄 Rematch</app-button>
-  <app-button [variant]="Variant.White" [size]="ButtonSize.Md" (clicked)="flipBoard.emit()">🔃 Flip</app-button>
+  <app-button [variant]="btnVariant()" [size]="ButtonSize.Md" (clicked)="resign.emit()">🏳️ Resign</app-button>
+  <app-button [variant]="btnVariant()" [size]="ButtonSize.Md" (clicked)="drawOffer.emit()">🤝 Draw</app-button>
+  <app-button [variant]="btnVariant()" [size]="ButtonSize.Md" (clicked)="rematch.emit()">🔄 Rematch</app-button>
+  <app-button [variant]="btnVariant()" [size]="ButtonSize.Md" (clicked)="flipBoard.emit()">🔃 Flip</app-button>
 </div>

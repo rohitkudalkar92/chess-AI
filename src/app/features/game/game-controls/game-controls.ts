@@ -1,7 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, inject, computed } from '@angular/core';
 
 import { Button } from '../../../shared/components/button/button';
 import { Variant, ButtonSize } from '../../../shared/enums';
+import { ThemeService } from '../../../shared/services/theme';
 
 @Component({
   selector: 'app-game-controls',
@@ -11,6 +12,9 @@ import { Variant, ButtonSize } from '../../../shared/enums';
 export class GameControls {
   Variant = Variant;
   ButtonSize = ButtonSize;
+
+  private _theme = inject(ThemeService);
+  btnVariant = computed(() => this._theme.isDark() ? Variant.White : Variant.Black);
 
   @Output() resign = new EventEmitter<void>();
   @Output() drawOffer = new EventEmitter<void>();

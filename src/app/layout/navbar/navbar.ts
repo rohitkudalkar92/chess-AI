@@ -21,6 +21,10 @@ export class Navbar {
 
   navMenus: NavMenu[] = [
     {
+      label: 'Home',
+      route: '/',
+    },
+    {
       label: 'Play',
       cols: 'grid-cols-3',
       sections: [
@@ -74,23 +78,7 @@ export class Navbar {
     },
     {
       label: 'About',
-      cols: 'grid-cols-2',
-      sections: [
-        {
-          title: 'Project',
-          links: [
-            { icon: 'ℹ️', label: 'About Us', route: '/about' },
-            { icon: '🛠', label: 'Tech Stack', route: '/about/tech' },
-          ],
-        },
-        {
-          title: 'Community',
-          links: [
-            { icon: '🐙', label: 'GitHub', route: 'https://github.com' },
-            { icon: '📬', label: 'Contact', route: '/contact' },
-          ],
-        },
-      ],
+      route: '/about',
     },
   ];
 

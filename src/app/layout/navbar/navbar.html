@@ -12,18 +12,18 @@
 
       <!-- Nav Links -->
       <ul class="flex gap-0 list-none m-0 p-0 text-sm font-medium">
-        <li>
-          <a routerLink="/" (click)="closeMenu()" [class]="homeLinkClasses">Home</a>
-        </li>
-
         @for (menu of navMenus; track menu.label) {
           <li>
-            <button (click)="toggleMenu(menu.label)" [class]="menuButtonClasses(menu.label)">
-              {{ menu.label }}
-              <svg [class]="chevronClasses(menu.label)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-              </svg>
-            </button>
+            @if (menu.sections) {
+              <button (click)="toggleMenu(menu.label)" [class]="menuButtonClasses(menu.label)">
+                {{ menu.label }}
+                <svg [class]="chevronClasses(menu.label)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+            } @else {
+              <a [routerLink]="menu.route" (click)="closeMenu()" [class]="homeLinkClasses">{{ menu.label }}</a>
+            }
           </li>
         }
       </ul>
