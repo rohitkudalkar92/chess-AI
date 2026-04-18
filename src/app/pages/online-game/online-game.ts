@@ -36,7 +36,7 @@ export class OnlineGame implements OnInit, OnDestroy {
   get isWhiteTurn() { return this._game.currentTurn() === Variant.White; }
 
   gameInfoItems: GameInfoItem[] = [
-    { icon: '⏱', label: 'Blitz · 5 min' },
+    { icon: '⏱', label: 'Bullet · 1 min' },
     { icon: '🌐', label: 'Online Match' },
     { icon: '🔴', label: 'Live' },
   ];
@@ -57,12 +57,13 @@ export class OnlineGame implements OnInit, OnDestroy {
     stats: { wins: 87, losses: 45, draws: 12 },
   };
 
-  playerTime = signal(300);
-  opponentTime = signal(300);
+  playerTime = signal(60);
+  opponentTime = signal(60);
   activeModal = signal<ModalAction>(null);
 
   private _timerInterval: ReturnType<typeof setInterval> | null = null;
   private _gameStarted = false;
+  private _firstMovePending = false;
 
   private _modalConfigs: Record<string, ModalConfig> = {
     resign: { icon: '🏳️', iconType: 'emoji', title: 'Resign Game?', message: 'You will lose this game. This action cannot be undone.', confirmLabel: 'Resign' },
@@ -80,8 +81,17 @@ export class OnlineGame implements OnInit, OnDestroy {
       if (this._game.gameOver()) return;
 
       if (!this._gameStarted) {
-        if (this._game.moveHistory().length > 0) this._gameStarted = true;
-        else return;
+        if (this._game.moveHistory().length > 0) {
+          this._gameStarted = true;
+          this._firstMovePending = true;
+          return;
+        }
+        return;
+      }
+
+      if (this._firstMovePending) {
+        this._firstMovePending = false;
+        return;
       }
 
       if (this.isWhiteTurn) {
