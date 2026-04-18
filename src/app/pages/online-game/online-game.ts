@@ -83,8 +83,9 @@ export class OnlineGame implements OnInit, OnDestroy {
         const history = this._game.moveHistory();
         if (history.length > 0 && history[0].black) {
           this._gameStarted = true;
+        } else {
+          return;
         }
-        return;
       }
 
       if (this.isWhiteTurn) {
