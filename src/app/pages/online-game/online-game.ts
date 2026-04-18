@@ -63,7 +63,6 @@ export class OnlineGame implements OnInit, OnDestroy {
 
   private _timerInterval: ReturnType<typeof setInterval> | null = null;
   private _gameStarted = false;
-  private _firstMovePending = false;
 
   private _modalConfigs: Record<string, ModalConfig> = {
     resign: { icon: '🏳️', iconType: 'emoji', title: 'Resign Game?', message: 'You will lose this game. This action cannot be undone.', confirmLabel: 'Resign' },
@@ -81,16 +80,10 @@ export class OnlineGame implements OnInit, OnDestroy {
       if (this._game.gameOver()) return;
 
       if (!this._gameStarted) {
-        if (this._game.moveHistory().length > 0) {
+        const history = this._game.moveHistory();
+        if (history.length > 0 && history[0].black) {
           this._gameStarted = true;
-          this._firstMovePending = true;
-          return;
         }
-        return;
-      }
-
-      if (this._firstMovePending) {
-        this._firstMovePending = false;
         return;
       }
 
