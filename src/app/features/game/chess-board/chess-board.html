@@ -1,13 +1,14 @@
 <div class="relative">
-  <!-- Flip button -->
-
   <div [class]="boardClasses">
     @for (rank of displayRanks; track rank; let ri = $index) {
       <div class="flex">
         @for (file of displayFiles; track file; let ci = $index) {
           @let r = toRow(ri);
           @let c = toCol(ci);
-          <div [class]="cellClasses(r, c)" (click)="onCellClick(r, c)">
+          <div [class]="cellClasses(r, c)"
+            (click)="onCellClick(r, c)"
+            (dragover)="onDragOver($event)"
+            (drop)="onDrop($event, r, c)">
 
             @if (ri === 7) {
               <span class="bottom-0.5 right-1" [class]="labelClasses(r, c)">{{ file }}</span>
@@ -19,10 +20,12 @@
 
             @if (board[r][c]; as piece) {
               <img [src]="getPieceImage(piece)" [alt]="piece.color + ' ' + piece.type"
-                class="w-14 h-14 drop-shadow-md transition-transform"
-                [class]="hasCapture(r, c) ? 'ring-4 ring-red-400 rounded-full' : 'hover:scale-110'" />
+                [class]="pieceClasses(r, c)"
+                draggable="true"
+                (dragstart)="onDragStart($event, r, c)"
+                (dragend)="onDragEnd()" />
             } @else if (isValidMove(r, c)) {
-              <span class="w-5 h-5 rounded-full bg-black/20 dark:bg-white/20"></span>
+              <span class="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 rounded-full bg-black/20 dark:bg-white/20"></span>
             }
           </div>
         }
@@ -34,8 +37,8 @@
     <div class="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-10">
       <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4 flex gap-3" [class]="radius.md">
         @for (type of promotionPieces; track type) {
-          <button (click)="onPromote(type)" class="w-16 h-16 flex items-center justify-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-all" [class]="radius.md">
-            <img [src]="getPromotionImage(type)" [alt]="type" class="w-12 h-12" />
+          <button (click)="onPromote(type)" class="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 flex items-center justify-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-all" [class]="radius.md">
+            <img [src]="getPromotionImage(type)" [alt]="type" class="w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12" />
           </button>
         }
       </div>

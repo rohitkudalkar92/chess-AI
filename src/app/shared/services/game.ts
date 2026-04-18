@@ -27,6 +27,7 @@ export class GameService {
   moveHistory = signal<Move[]>([]);
   capturedByWhite = signal<ChessPiece[]>([]);
   capturedByBlack = signal<ChessPiece[]>([]);
+  lastMove = signal<{ from: Position; to: Position } | null>(null);
 
   private _files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   private _pendingMoveNotation: string | null = null;
@@ -155,6 +156,7 @@ export class GameService {
 
     board[to.row][to.col] = piece;
     board[from.row][from.col] = null;
+    this.lastMove.set({ from, to });
     this.board.set(board);
 
     // Pawn promotion — store notation prefix, complete in promote()

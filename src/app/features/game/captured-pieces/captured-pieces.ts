@@ -14,6 +14,6 @@ export class CapturedPieces {
   radius = BORDER_RADIUS;
 
   getPieceImage(piece: ChessPiece): string {
-    return `assets/icons/${piece.color}-${piece.type}.svg`;
+    return `assets/board/${piece.color}-${piece.type}.svg`;
   }
 }

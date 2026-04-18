@@ -40,3 +40,12 @@ body {
 .animate-slide-down {
   animation: slide-down 0.25s ease-out;
 }
+
+@keyframes piece-slide {
+  from { transform: scale(1.15); opacity: 0.7; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-piece-slide {
+  animation: piece-slide 0.2s ease-out;
+}
