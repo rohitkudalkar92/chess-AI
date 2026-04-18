@@ -28,5 +28,9 @@ export class ThemeService {
 
   private _applyTheme(theme: Variant): void {
     document.documentElement.classList.toggle('dark', theme === Variant.Black);
+    const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement | null;
+    if (favicon) {
+      favicon.href = theme === Variant.Black ? 'assets/icons/white-king.svg' : 'assets/icons/black-king.svg';
+    }
   }
 }
