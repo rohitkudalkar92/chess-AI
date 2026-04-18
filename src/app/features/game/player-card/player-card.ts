@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
 
-import { Player } from '../interfaces';
-import { Variant } from '../enums';
-import { BORDER_RADIUS } from '../constants';
+import { Player } from '../../../shared/interfaces';
+import { Variant } from '../../../shared/enums';
+import { BORDER_RADIUS } from '../../../shared/constants';
 
 @Component({
   selector: 'app-player-card',
@@ -42,6 +42,7 @@ export class PlayerCard {
   }
 
   get colorLabel(): string {
-    return this.player().color === Variant.White ? '⬜ White' : '⬛ Black';
+    const icon = this.player().color === Variant.White ? '⬜' : '⬛';
+    return `${icon} ${this.player().color}`;
   }
 }

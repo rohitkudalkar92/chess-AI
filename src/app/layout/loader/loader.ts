@@ -1,5 +1,5 @@
 import { Component, signal, OnInit, OnDestroy } from '@angular/core';
-import { APP_NAME, LOADER_MESSAGE, BORDER_RADIUS } from '../shared/constants';
+import { APP_NAME, LOADER_MESSAGE, BORDER_RADIUS } from '../../shared/constants';
 
 @Component({
   selector: 'app-loader',

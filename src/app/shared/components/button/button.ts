@@ -1,17 +1,18 @@
 import { Component, input, Output, EventEmitter } from '@angular/core';
-import { Variant, ButtonSize } from '../enums';
-import { BORDER_RADIUS } from '../constants';
+import { Variant, ButtonSize } from '../../enums';
+import { BORDER_RADIUS } from '../../constants';
 
 @Component({
   selector: 'app-button',
   templateUrl: './button.html',
-  styles: ':host { display: inline-block; }',
+  styles: ':host { display: block; }',
 })
 export class Button {
   // Inputs
   variant = input<Variant>(Variant.Black);
   size = input<ButtonSize>(ButtonSize.Md);
   disabled = input(false);
+  block = input(false);
 
   // Outputs
   @Output() clicked = new EventEmitter<void>();
@@ -31,8 +32,9 @@ export class Button {
       white: 'bg-white hover:bg-gray-100 text-gray-900 shadow-md shadow-black/10',
     };
 
+    const blockStyle = this.block() ? 'w-full' : '';
     const disabledStyle = this.disabled() ? 'opacity-50 pointer-events-none' : '';
 
-    return `${base} ${sizes[this.size()]} ${variants[this.variant()]} ${disabledStyle}`;
+    return `${base} ${sizes[this.size()]} ${variants[this.variant()]} ${blockStyle} ${disabledStyle}`;
   }
 }

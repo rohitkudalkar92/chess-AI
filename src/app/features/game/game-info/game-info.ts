@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 
-import { GameInfoItem } from '../interfaces';
-import { BORDER_RADIUS } from '../constants';
+import { GameInfoItem } from '../../../shared/interfaces';
+import { BORDER_RADIUS } from '../../../shared/constants';
 
 @Component({
   selector: 'app-game-info',

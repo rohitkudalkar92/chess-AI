@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Landing } from './landing/landing';
+import { Landing } from './pages/landing/landing';
 import { OnlineGame } from './pages/online-game/online-game';
 
 export const routes: Routes = [

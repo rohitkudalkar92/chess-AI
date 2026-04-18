@@ -1,0 +1,19 @@
+<div [class]="overlayClasses" (click)="onOverlayClick($event)">
+  <div [class]="panelClasses">
+    @if (iconType() === 'image') {
+      <img [src]="icon()" alt="" class="w-12 h-12" />
+    } @else {
+      <span class="text-4xl">{{ icon() }}</span>
+    }
+    <h2 class="text-lg font-bold text-gray-900 dark:text-white">{{ title() }}</h2>
+    <p class="text-sm text-gray-500 dark:text-gray-400 text-center">{{ message() }}</p>
+    <div class="flex gap-3 w-full mt-2">
+      <div class="flex-1">
+        <app-button [variant]="Variant.White" [size]="ButtonSize.Md" [block]="true" (clicked)="cancelled.emit()">{{ cancelLabel() }}</app-button>
+      </div>
+      <div class="flex-1">
+        <app-button [variant]="Variant.Black" [size]="ButtonSize.Md" [block]="true" (clicked)="confirmed.emit()">{{ confirmLabel() }}</app-button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 
-import { Move } from '../interfaces';
-import { BORDER_RADIUS } from '../constants';
+import { Move } from '../../../shared/interfaces';
+import { BORDER_RADIUS } from '../../../shared/constants';
 
 @Component({
   selector: 'app-move-history',

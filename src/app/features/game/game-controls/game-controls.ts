@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { Button } from '../button/button';
-import { Variant, ButtonSize } from '../enums';
+import { Button } from '../../../shared/components/button/button';
+import { Variant, ButtonSize } from '../../../shared/enums';
 
 @Component({
   selector: 'app-game-controls',
@@ -15,4 +15,5 @@ export class GameControls {
   @Output() resign = new EventEmitter<void>();
   @Output() drawOffer = new EventEmitter<void>();
   @Output() rematch = new EventEmitter<void>();
+  @Output() flipBoard = new EventEmitter<void>();
 }

@@ -1,0 +1,10 @@
+<div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4" [class]="radius.md">
+  <h3 class="text-sm font-semibold text-gray-900 dark:text-white mb-2">{{ label() }}</h3>
+  <div class="flex flex-wrap gap-1 min-h-[32px]">
+    @for (piece of pieces(); track $index) {
+      <img [src]="getPieceImage(piece)" [alt]="piece.color + ' ' + piece.type" class="w-7 h-7 drop-shadow-sm" />
+    } @empty {
+      <p class="text-xs text-gray-400 dark:text-gray-500">None yet</p>
+    }
+  </div>
+</div>

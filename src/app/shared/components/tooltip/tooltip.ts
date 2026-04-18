@@ -1,7 +1,7 @@
 import { Component, computed, input, signal } from '@angular/core';
 
-import { Variant, TooltipPosition, TooltipTrigger } from '../enums';
-import { BORDER_RADIUS } from '../constants';
+import { Variant, TooltipPosition, TooltipTrigger } from '../../enums';
+import { BORDER_RADIUS } from '../../constants';
 
 @Component({
   selector: 'app-tooltip',

@@ -1,19 +1,40 @@
-import { Component, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, signal, inject, viewChild, OnInit, OnDestroy } from '@angular/core';
 
-import { ChessBoard } from '../../shared/chess-board/chess-board';
-import { PlayerCard } from '../../shared/player-card/player-card';
-import { MoveHistory } from '../../shared/move-history/move-history';
-import { GameControls } from '../../shared/game-controls/game-controls';
-import { GameInfo } from '../../shared/game-info/game-info';
-import { Player, Move, GameInfoItem } from '../../shared/interfaces';
+import { ChessBoard } from '../../features/game/chess-board/chess-board';
+import { PlayerCard } from '../../features/game/player-card/player-card';
+import { MoveHistory } from '../../features/game/move-history/move-history';
+import { GameControls } from '../../features/game/game-controls/game-controls';
+import { GameInfo } from '../../features/game/game-info/game-info';
+import { ConfirmModal } from '../../shared/components/confirm-modal/confirm-modal';
+import { CapturedPieces } from '../../features/game/captured-pieces/captured-pieces';
+import { Player, GameInfoItem } from '../../shared/interfaces';
 import { Variant } from '../../shared/enums';
+import { GameService } from '../../shared/services/game';
+
+type ModalAction = 'resign' | 'draw' | 'rematch' | null;
+
+interface ModalConfig {
+  icon: string;
+  iconType: 'emoji' | 'image';
+  title: string;
+  message: string;
+  confirmLabel: string;
+}
 
 @Component({
   selector: 'app-online-game',
-  imports: [ChessBoard, PlayerCard, MoveHistory, GameControls, GameInfo],
+  imports: [ChessBoard, PlayerCard, MoveHistory, GameControls, GameInfo, ConfirmModal, CapturedPieces],
   templateUrl: './online-game.html',
 })
 export class OnlineGame implements OnInit, OnDestroy {
+  private _game = inject(GameService);
+  private _board = viewChild(ChessBoard);
+
+  get moves() { return this._game.moveHistory(); }
+  get capturedByWhite() { return this._game.capturedByWhite(); }
+  get capturedByBlack() { return this._game.capturedByBlack(); }
+  get isWhiteTurn() { return this._game.currentTurn() === Variant.White; }
+
   gameInfoItems: GameInfoItem[] = [
     { icon: '⏱', label: 'Rapid · 15 min' },
     { icon: '🌐', label: 'Online Match' },
@@ -36,41 +57,37 @@ export class OnlineGame implements OnInit, OnDestroy {
     stats: { wins: 87, losses: 45, draws: 12 },
   };
 
-  moves: Move[] = [
-    { number: 1, white: 'e4', black: 'e5' },
-    { number: 2, white: 'Nf3', black: 'Nc6' },
-    { number: 3, white: 'Bb5', black: 'a6' },
-    { number: 4, white: 'Ba4', black: 'Nf6' },
-    { number: 5, white: 'O-O' },
-  ];
-
-  isPlayerTurn = signal(true);
   playerTime = signal(900);
   opponentTime = signal(900);
+  activeModal = signal<ModalAction>(null);
 
   private _timerInterval: ReturnType<typeof setInterval> | null = null;
-  private _switchInterval: ReturnType<typeof setInterval> | null = null;
-  private _moveSound = new Audio('assets/mp3/move.mp3');
+
+  private _modalConfigs: Record<string, ModalConfig> = {
+    resign: { icon: '🏳️', iconType: 'emoji', title: 'Resign Game?', message: 'You will lose this game. This action cannot be undone.', confirmLabel: 'Resign' },
+    draw: { icon: '🤝', iconType: 'emoji', title: 'Offer Draw?', message: 'Your opponent will be asked to accept or decline.', confirmLabel: 'Offer Draw' },
+    rematch: { icon: '🔄', iconType: 'emoji', title: 'Request Rematch?', message: 'A new game will start with the same opponent.', confirmLabel: 'Rematch' },
+  };
+
+  get modalConfig(): ModalConfig | null {
+    const action = this.activeModal();
+    return action ? this._modalConfigs[action] : null;
+  }
 
   ngOnInit(): void {
     this._timerInterval = setInterval(() => {
-      if (this.isPlayerTurn()) {
+      if (this._game.gameOver()) return;
+
+      if (this.isWhiteTurn) {
         this.playerTime.update(t => Math.max(0, t - 1));
       } else {
         this.opponentTime.update(t => Math.max(0, t - 1));
       }
     }, 1000);
-
-    this._switchInterval = setInterval(() => {
-      this.isPlayerTurn.update(v => !v);
-      this._moveSound.currentTime = 0;
-      this._moveSound.play();
-    }, 5000);
   }
 
   ngOnDestroy(): void {
     if (this._timerInterval) clearInterval(this._timerInterval);
-    if (this._switchInterval) clearInterval(this._switchInterval);
   }
 
   formatTime(seconds: number): string {
@@ -79,15 +96,23 @@ export class OnlineGame implements OnInit, OnDestroy {
     return `${m}:${s.toString().padStart(2, '0')}`;
   }
 
-  onResign(): void {
-    console.log('Resigned');
+  onFlipBoard(): void {
+    this._board()?.toggleFlip();
   }
 
-  onDrawOffer(): void {
-    console.log('Draw offered');
+  openModal(action: ModalAction): void {
+    this.activeModal.set(action);
   }
 
-  onRematch(): void {
-    console.log('Rematch requested');
+  closeModal(): void {
+    this.activeModal.set(null);
+  }
+
+  confirmAction(): void {
+    const action = this.activeModal();
+    if (action === 'resign') console.log('Resigned');
+    if (action === 'draw') console.log('Draw offered');
+    if (action === 'rematch') console.log('Rematch requested');
+    this.closeModal();
   }
 }

@@ -3,8 +3,8 @@
 
     <!-- Players (left) -->
     <div class="flex flex-col gap-8 lg:self-center">
-      <app-player-card [player]="opponent" [time]="formatTime(opponentTime())" [isActive]="!isPlayerTurn()" />
-      <app-player-card [player]="player" [time]="formatTime(playerTime())" [isActive]="isPlayerTurn()" />
+      <app-player-card [player]="opponent" [time]="formatTime(opponentTime())" [isActive]="!isWhiteTurn" />
+      <app-player-card [player]="player" [time]="formatTime(playerTime())" [isActive]="isWhiteTurn" />
     </div>
 
     <!-- Board (center) -->
@@ -13,12 +13,27 @@
     <!-- Sidebar (right) -->
     <aside class="w-full lg:w-72 flex flex-col gap-4">
       <app-game-info [items]="gameInfoItems" />
+      <app-captured-pieces label="White captured" [pieces]="capturedByWhite" />
+      <app-captured-pieces label="Black captured" [pieces]="capturedByBlack" />
       <app-game-controls
-        (resign)="onResign()"
-        (drawOffer)="onDrawOffer()"
-        (rematch)="onRematch()" />
+        (resign)="openModal('resign')"
+        (drawOffer)="openModal('draw')"
+        (rematch)="openModal('rematch')"
+        (flipBoard)="onFlipBoard()" />
       <app-move-history [moves]="moves" />
     </aside>
 
   </div>
 </section>
+
+<!-- Confirm Modal -->
+@if (modalConfig; as config) {
+  <app-confirm-modal
+    [icon]="config.icon"
+    [iconType]="config.iconType"
+    [title]="config.title"
+    [message]="config.message"
+    [confirmLabel]="config.confirmLabel"
+    (confirmed)="confirmAction()"
+    (cancelled)="closeModal()" />
+}

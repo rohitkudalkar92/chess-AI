@@ -1,10 +1,10 @@
 import { Component, inject, signal, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Tooltip } from '../shared/tooltip/tooltip';
-import { Variant, TooltipPosition } from '../shared/enums';
-import { NavMenu } from '../shared/interfaces';
-import { BORDER_RADIUS } from '../shared/constants';
-import { ThemeService } from '../shared/services/theme';
+import { Tooltip } from '../../shared/components/tooltip/tooltip';
+import { Variant, TooltipPosition } from '../../shared/enums';
+import { NavMenu } from '../../shared/interfaces';
+import { BORDER_RADIUS } from '../../shared/constants';
+import { ThemeService } from '../../shared/services/theme';
 
 @Component({
   selector: 'app-navbar',
