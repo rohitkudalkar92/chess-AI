@@ -21,7 +21,7 @@ export class GameService {
   selectedPosition = signal<Position | null>(null);
   validMoves = signal<Position[]>([]);
   inCheck = signal<Variant | null>(null);
-  gameOver = signal<'checkmate' | 'stalemate' | 'repetition' | 'fifty-move' | 'insufficient' | null>(null);
+  gameOver = signal<'checkmate' | 'stalemate' | 'repetition' | 'fifty-move' | 'insufficient' | 'timeout' | null>(null);
   winner = signal<Variant | null>(null);
   pendingPromotion = signal<Position | null>(null);
   moveHistory = signal<Move[]>([]);
@@ -45,6 +45,11 @@ export class GameService {
     whiteKing: false, whiteQueenside: false, whiteKingside: false,
     blackKing: false, blackQueenside: false, blackKingside: false,
   };
+
+  endByTimeout(loser: Variant): void {
+    this.gameOver.set('timeout');
+    this.winner.set(loser === Variant.White ? Variant.Black : Variant.White);
+  }
 
   selectCell(row: number, col: number): void {
     if (this.gameOver() || this.pendingPromotion()) return;

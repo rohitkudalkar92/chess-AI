@@ -51,6 +51,8 @@
         <p class="text-4xl font-bold text-white mb-2">
           @if (gameOver === 'checkmate') {
             ♚ Checkmate!
+          } @else if (gameOver === 'timeout') {
+            ⏱️ Time's Up!
           } @else if (gameOver === 'repetition') {
             🔁 Draw by Repetition!
           } @else if (gameOver === 'fifty-move') {

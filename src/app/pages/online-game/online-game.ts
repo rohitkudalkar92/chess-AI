@@ -96,8 +96,10 @@ export class OnlineGame implements OnInit, OnDestroy {
 
       if (this.isWhiteTurn) {
         this.playerTime.update(t => Math.max(0, t - 1));
+        if (this.playerTime() === 0) this._game.endByTimeout(Variant.White);
       } else {
         this.opponentTime.update(t => Math.max(0, t - 1));
+        if (this.opponentTime() === 0) this._game.endByTimeout(Variant.Black);
       }
     }, 1000);
   }
