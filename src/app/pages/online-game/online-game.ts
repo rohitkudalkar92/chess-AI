@@ -36,7 +36,7 @@ export class OnlineGame implements OnInit, OnDestroy {
   get isWhiteTurn() { return this._game.currentTurn() === Variant.White; }
 
   gameInfoItems: GameInfoItem[] = [
-    { icon: '⏱', label: 'Rapid · 15 min' },
+    { icon: '⏱', label: 'Blitz · 5 min' },
     { icon: '🌐', label: 'Online Match' },
     { icon: '🔴', label: 'Live' },
   ];
@@ -57,8 +57,8 @@ export class OnlineGame implements OnInit, OnDestroy {
     stats: { wins: 87, losses: 45, draws: 12 },
   };
 
-  playerTime = signal(900);
-  opponentTime = signal(900);
+  playerTime = signal(300);
+  opponentTime = signal(300);
   activeModal = signal<ModalAction>(null);
 
   private _timerInterval: ReturnType<typeof setInterval> | null = null;
