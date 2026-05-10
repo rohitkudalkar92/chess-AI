@@ -26,15 +26,25 @@ export class Navbar {
     },
     {
       label: 'About Us',
-      cols: 'grid-cols-2',
+      cols: 'grid-cols-3',
       sections: [
         {
-          title: 'Branding & Analytics',
+          title: 'Our Story',
           links: [
             { icon: '📖', label: 'How it All Started?', route: '/about/story' },
             { icon: '✨', label: 'How We Stand Out?', route: '/about/standout' },
+          ],
+        },
+        {
+          title: 'Achievements',
+          links: [
             { icon: '📊', label: 'Key Statistics', route: '/about/stats' },
             { icon: '💼', label: 'Our Work', route: '/about/work' },
+          ],
+        },
+        {
+          title: 'Network',
+          links: [
             { icon: '🤝', label: 'Clients & Partners', route: '/about/partners' },
             { icon: '📅', label: 'Over The Years', route: '/about/timeline' },
           ],
@@ -43,18 +53,28 @@ export class Navbar {
     },
     {
       label: 'What We Offer?',
-      cols: 'grid-cols-2',
+      cols: 'grid-cols-3',
       sections: [
         {
-          title: 'Sales & Operations',
+          title: 'Consulting',
           links: [
             { icon: '🏆', label: 'Tournament Consulting', route: '/offer/tournaments' },
             { icon: '📝', label: 'Content & Marketing', route: '/offer/content' },
             { icon: '🎙', label: 'Interviews & Podcast', route: '/offer/podcast' },
-            { icon: '📢', label: 'Influencer', route: '/offer/influencer' },
+          ],
+        },
+        {
+          title: 'Events & Media',
+          links: [
             { icon: '🎪', label: 'Hosting / Anchor Events', route: '/offer/events' },
             { icon: '🎓', label: 'Workshops', route: '/offer/workshops' },
             { icon: '🎬', label: 'Media Services', route: '/offer/media' },
+          ],
+        },
+        {
+          title: 'Connections',
+          links: [
+            { icon: '📢', label: 'Influencer', route: '/offer/influencer' },
             { icon: '⭐', label: 'Chess Celebrity Connect', route: '/offer/celebrity' },
           ],
         },
@@ -62,47 +82,77 @@ export class Navbar {
     },
     {
       label: 'Everything Chess',
-      cols: 'grid-cols-2',
+      cols: 'grid-cols-3',
       sections: [
         {
-          title: 'Pre-Sales',
+          title: 'Compete',
           links: [
             { icon: '♟', label: 'Chess Tournaments', route: '/chess/tournaments' },
-            { icon: '🌐', label: 'Chess Websites', route: '/chess/websites' },
             { icon: '📈', label: 'Chess Rankings', route: '/chess/rankings' },
-            { icon: '🏠', label: 'Chess Clubs', route: '/chess/clubs' },
             { icon: '👤', label: 'Chess Players Rankings', route: '/chess/players' },
+          ],
+        },
+        {
+          title: 'Explore',
+          links: [
+            { icon: '🌐', label: 'Chess Websites', route: '/chess/websites' },
             { icon: '💻', label: 'Chess Online', route: '/chess/online' },
-            { icon: '♜', label: 'Chess Sets', route: '/chess/sets' },
             { icon: '📰', label: 'Chess Magazines', route: '/chess/magazines' },
+          ],
+        },
+        {
+          title: 'Community',
+          links: [
+            { icon: '🏠', label: 'Chess Clubs', route: '/chess/clubs' },
+            { icon: '♜', label: 'Chess Sets', route: '/chess/sets' },
           ],
         },
       ],
     },
     {
       label: "What's Hot?",
-      cols: 'grid-cols-2',
+      cols: 'grid-cols-3',
       sections: [
         {
-          title: 'Marketing',
+          title: 'News',
+          links: [
+            { icon: '📰', label: 'Breaking News', route: '/hot/news' },
+          ],
+        },
+        {
+          title: 'Content',
+          links: [
+            { icon: '📝', label: 'Blogs', route: '/hot/blogs' },
+            { icon: '🎙', label: 'Podcast', route: '/hot/podcast' },
+          ],
+        },
+        {
+          title: 'Happenings',
           links: [
             { icon: '🎉', label: 'Events', route: '/hot/events' },
-            { icon: '📝', label: 'Blogs', route: '/hot/blogs' },
-            { icon: '📰', label: 'Breaking News', route: '/hot/news' },
-            { icon: '🎙', label: 'Podcast', route: '/hot/podcast' },
           ],
         },
       ],
     },
     {
       label: 'Contact Us',
-      cols: 'grid-cols-1',
+      cols: 'grid-cols-3',
       sections: [
         {
-          title: 'HR',
+          title: 'Reach Out',
           links: [
             { icon: '📬', label: 'Inquiry / Feedback Form', route: '/contact/inquiry' },
+          ],
+        },
+        {
+          title: 'Connect',
+          links: [
             { icon: '🔗', label: 'Social Media Links', route: '/contact/social' },
+          ],
+        },
+        {
+          title: 'Request',
+          links: [
             { icon: '♟', label: 'Anything in Chess You Need?', route: '/contact/request' },
           ],
         },
