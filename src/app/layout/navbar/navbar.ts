@@ -25,60 +25,88 @@ export class Navbar {
       route: '/',
     },
     {
-      label: 'Play',
-      cols: 'grid-cols-3',
-      sections: [
-        {
-          title: 'Game Modes',
-          links: [
-            { icon: '♟', label: 'Play vs AI', route: '/play/vs-ai' },
-            { icon: '👥', label: 'Local Match', route: '/play/local' },
-            { icon: '🌐', label: 'Online Match', route: '/play/online' },
-          ],
-        },
-        {
-          title: 'Difficulty',
-          links: [
-            { icon: '🟢', label: 'Easy', route: '/play/easy', hoverClass: 'hover:bg-green-50 hover:text-green-700' },
-            { icon: '🟡', label: 'Medium', route: '/play/medium', hoverClass: 'hover:bg-amber-50 hover:text-amber-700' },
-            { icon: '🔴', label: 'Hard', route: '/play/hard', hoverClass: 'hover:bg-red-50 hover:text-red-700' },
-          ],
-        },
-        {
-          title: 'Time Controls',
-          links: [
-            { icon: '⚡', label: 'Bullet · 1 min', route: '/play/bullet' },
-            { icon: '🔥', label: 'Blitz · 5 min', route: '/play/blitz' },
-            { icon: '⏱', label: 'Rapid · 15 min', route: '/play/rapid' },
-          ],
-        },
-      ],
-    },
-    {
-      label: 'Learn',
+      label: 'About Us',
       cols: 'grid-cols-2',
       sections: [
         {
-          title: 'Tutorials',
+          title: 'Branding & Analytics',
           links: [
-            { icon: '📖', label: 'Chess Basics', route: '/learn/basics' },
-            { icon: '🏁', label: 'Openings', route: '/learn/openings' },
-            { icon: '🏆', label: 'Endgames', route: '/learn/endgames' },
-          ],
-        },
-        {
-          title: 'Practice',
-          links: [
-            { icon: '🧩', label: 'Puzzles', route: '/learn/puzzles' },
-            { icon: '⚔️', label: 'Tactics Trainer', route: '/learn/tactics' },
-            { icon: '📊', label: 'Game Analysis', route: '/learn/analysis' },
+            { icon: '📖', label: 'How it All Started?', route: '/about/story' },
+            { icon: '✨', label: 'How We Stand Out?', route: '/about/standout' },
+            { icon: '📊', label: 'Key Statistics', route: '/about/stats' },
+            { icon: '💼', label: 'Our Work', route: '/about/work' },
+            { icon: '🤝', label: 'Clients & Partners', route: '/about/partners' },
+            { icon: '📅', label: 'Over The Years', route: '/about/timeline' },
           ],
         },
       ],
     },
     {
-      label: 'About',
-      route: '/about',
+      label: 'What We Offer?',
+      cols: 'grid-cols-2',
+      sections: [
+        {
+          title: 'Sales & Operations',
+          links: [
+            { icon: '🏆', label: 'Tournament Consulting', route: '/offer/tournaments' },
+            { icon: '📝', label: 'Content & Marketing', route: '/offer/content' },
+            { icon: '🎙', label: 'Interviews & Podcast', route: '/offer/podcast' },
+            { icon: '📢', label: 'Influencer', route: '/offer/influencer' },
+            { icon: '🎪', label: 'Hosting / Anchor Events', route: '/offer/events' },
+            { icon: '🎓', label: 'Workshops', route: '/offer/workshops' },
+            { icon: '🎬', label: 'Media Services', route: '/offer/media' },
+            { icon: '⭐', label: 'Chess Celebrity Connect', route: '/offer/celebrity' },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Everything Chess',
+      cols: 'grid-cols-2',
+      sections: [
+        {
+          title: 'Pre-Sales',
+          links: [
+            { icon: '♟', label: 'Chess Tournaments', route: '/chess/tournaments' },
+            { icon: '🌐', label: 'Chess Websites', route: '/chess/websites' },
+            { icon: '📈', label: 'Chess Rankings', route: '/chess/rankings' },
+            { icon: '🏠', label: 'Chess Clubs', route: '/chess/clubs' },
+            { icon: '👤', label: 'Chess Players Rankings', route: '/chess/players' },
+            { icon: '💻', label: 'Chess Online', route: '/chess/online' },
+            { icon: '♜', label: 'Chess Sets', route: '/chess/sets' },
+            { icon: '📰', label: 'Chess Magazines', route: '/chess/magazines' },
+          ],
+        },
+      ],
+    },
+    {
+      label: "What's Hot?",
+      cols: 'grid-cols-2',
+      sections: [
+        {
+          title: 'Marketing',
+          links: [
+            { icon: '🎉', label: 'Events', route: '/hot/events' },
+            { icon: '📝', label: 'Blogs', route: '/hot/blogs' },
+            { icon: '📰', label: 'Breaking News', route: '/hot/news' },
+            { icon: '🎙', label: 'Podcast', route: '/hot/podcast' },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Contact Us',
+      cols: 'grid-cols-1',
+      sections: [
+        {
+          title: 'HR',
+          links: [
+            { icon: '📬', label: 'Inquiry / Feedback Form', route: '/contact/inquiry' },
+            { icon: '🔗', label: 'Social Media Links', route: '/contact/social' },
+            { icon: '♟', label: 'Anything in Chess You Need?', route: '/contact/request' },
+          ],
+        },
+      ],
     },
   ];
 
