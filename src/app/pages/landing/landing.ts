@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { Button } from '../../shared/components/button/button';
 import { Variant, ButtonSize } from '../../shared/enums';
@@ -17,6 +18,12 @@ interface Step {
   description: string;
 }
 
+interface MapLocation {
+  city: string;
+  country: string;
+  embedUrl: SafeResourceUrl;
+}
+
 @Component({
   selector: 'app-landing',
   imports: [RouterLink, Button],
@@ -26,6 +33,8 @@ export class Landing {
   Variant = Variant;
   ButtonSize = ButtonSize;
   radius = BORDER_RADIUS;
+
+  private _sanitizer = inject(DomSanitizer);
 
   features: Feature[] = [
     {
@@ -60,6 +69,24 @@ export class Landing {
       number: '03',
       title: 'Learn & Improve',
       description: 'Review your games, solve puzzles, and train with tactics to level up.',
+    },
+  ];
+
+  locations: MapLocation[] = [
+    {
+      city: 'Mumbai',
+      country: 'India',
+      embedUrl: this._sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps?q=Mumbai,India&output=embed'),
+    },
+    {
+      city: 'Amsterdam',
+      country: 'Netherlands',
+      embedUrl: this._sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps?q=Amsterdam,Netherlands&output=embed'),
+    },
+    {
+      city: 'London',
+      country: 'United Kingdom',
+      embedUrl: this._sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps?q=London,UK&output=embed'),
     },
   ];
 }

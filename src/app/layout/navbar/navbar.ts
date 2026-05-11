@@ -76,6 +76,7 @@ export class Navbar {
           links: [
             { icon: '📢', label: 'Influencer', route: '/offer/influencer' },
             { icon: '⭐', label: 'Chess Celebrity Connect', route: '/offer/celebrity' },
+            { icon: '📱', label: 'Chess Social Media Channels', route: '/offer/social-media' },
           ],
         },
       ],
@@ -153,7 +154,7 @@ export class Navbar {
         {
           title: 'Request',
           links: [
-            { icon: '♟', label: 'Anything in Chess You Need?', route: '/contact/request' },
+            { icon: '♟', label: 'Finally Anything in Chess!', route: '/contact/request' },
           ],
         },
       ],

@@ -61,3 +61,25 @@
     </div>
   </div>
 </section>
+
+<!-- Our Locations Section -->
+<section class="bg-gray-50 dark:bg-gray-800/50 py-24 transition-colors duration-200">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Our Locations</h2>
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Find us across the globe.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      @for (location of locations; track location.city) {
+        <article class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-200" [class]="radius.md">
+          <iframe [src]="location.embedUrl" class="w-full h-56 border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" [title]="location.city + ' map'"></iframe>
+          <div class="p-4 text-center">
+            <span class="text-xl">📍</span>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ location.city }}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400">{{ location.country }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
