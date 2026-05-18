@@ -1,0 +1,65 @@
+<!-- Hero -->
+<section class="py-24">
+  <div class="max-w-2xl mx-auto px-4 text-center">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white">
+      <span class="text-gradient-shimmer">Contact Us</span>
+    </h1>
+    <p class="mt-4 text-gray-500 dark:text-gray-400">Have a question or want to share feedback? I'd love to hear from you.</p>
+  </div>
+</section>
+
+<!-- Form -->
+<section class="pb-24">
+  <div class="max-w-xl mx-auto px-4">
+    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-8 shadow-sm" [class]="radius.md">
+      @if (submitted()) {
+        <div class="text-center">
+          <span class="text-4xl block mb-3">✅</span>
+          <h2 class="text-xl font-bold text-gray-900 dark:text-white">Thank you!</h2>
+          <p class="mt-2 text-gray-500 dark:text-gray-400">Your message has been sent. I'll get back to you soon.</p>
+          <button (click)="submitted.set(false)" class="mt-6 px-5 py-2 bg-amber-500 hover:bg-amber-400 text-white font-semibold transition" [class]="radius.md">Send Another</button>
+        </div>
+      } @else {
+        <form (ngSubmit)="onSubmit()" class="space-y-5">
+          <!-- Name -->
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+            <input id="name" type="text" [(ngModel)]="form.name" name="name" required placeholder="Your name" class="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" [class]="radius.md" />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+            <input id="email" type="email" [(ngModel)]="form.email" name="email" required placeholder="your@email.com" class="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" [class]="radius.md" />
+          </div>
+
+          <!-- Type -->
+          <div>
+            <label for="type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Type</label>
+            <select id="type" [(ngModel)]="form.type" name="type" class="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition" [class]="radius.md">
+              <option value="inquiry">Inquiry</option>
+              <option value="feedback">Feedback</option>
+              <option value="collaboration">Collaboration</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <!-- Subject -->
+          <div>
+            <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
+            <input id="subject" type="text" [(ngModel)]="form.subject" name="subject" required placeholder="What's this about?" class="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 transition" [class]="radius.md" />
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+            <textarea id="message" [(ngModel)]="form.message" name="message" required rows="5" placeholder="Write your message here..." class="w-full px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 transition resize-none" [class]="radius.md"></textarea>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="w-full px-6 py-3 bg-amber-500 hover:bg-amber-400 text-white font-semibold transition" [class]="radius.md">Send Message</button>
+        </form>
+      }
+    </div>
+  </div>
+</section>

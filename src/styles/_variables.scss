@@ -1,0 +1,32 @@
+// Brand Colors
+$color-primary: #10b981;
+$color-secondary: #06b6d4;
+$color-accent: #a5f3fc;
+
+// Gradient
+$gradient-shimmer: linear-gradient(
+  90deg,
+  $color-primary 0%,
+  $color-secondary 25%,
+  $color-accent 50%,
+  $color-secondary 75%,
+  $color-primary 100%
+);
+
+// Amber (Actions)
+$color-amber: #10b981;
+$color-amber-hover: #06b6d4;
+
+// Dark Theme
+$dark-bg: #111827;
+$dark-surface: #1f2937;
+$dark-border: #374151;
+$dark-text-primary: #f3f4f6;
+$dark-text-secondary: #9ca3af;
+
+// Light Theme
+$light-bg: #ffffff;
+$light-surface: #f9fafb;
+$light-border: #e5e7eb;
+$light-text-primary: #111827;
+$light-text-secondary: #6b7280;

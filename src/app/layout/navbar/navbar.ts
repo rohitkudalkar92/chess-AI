@@ -1,10 +1,11 @@
 import { Component, inject, signal, HostListener } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { Tooltip } from '../../shared/components/tooltip/tooltip';
 import { Variant, TooltipPosition } from '../../shared/enums';
 import { NavMenu } from '../../shared/interfaces';
 import { BORDER_RADIUS } from '../../shared/constants';
 import { ThemeService } from '../../shared/services/theme';
+import { TEXTS } from '../../shared/texts';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,8 @@ export class Navbar {
   TooltipPosition = TooltipPosition;
   radius = BORDER_RADIUS;
   themeService = inject(ThemeService);
+  appName = TEXTS.app.name;
+  private _router = inject(Router);
 
   activeMenu = signal<string | null>(null);
 
@@ -31,22 +34,22 @@ export class Navbar {
         {
           title: 'Our Story',
           links: [
-            { icon: '📖', label: 'How it All Started?', route: '/about/story' },
-            { icon: '✨', label: 'How We Stand Out?', route: '/about/standout' },
+            { icon: 'question', iconType: 'svg', label: 'How it All Started?', route: '/about/story' },
+            { icon: 'stars', iconType: 'svg', label: 'How We Stand Out?', route: '/about/standout' },
           ],
         },
         {
           title: 'Achievements',
           links: [
-            { icon: '📊', label: 'Key Statistics', route: '/about/stats' },
-            { icon: '💼', label: 'Our Work', route: '/about/work' },
+            { icon: 'statistics', iconType: 'svg', label: 'Key Statistics', route: '/about/stats' },
+            { icon: 'work', iconType: 'svg', label: 'Our Work', route: '/about/work' },
           ],
         },
         {
           title: 'Network',
           links: [
-            { icon: '🤝', label: 'Clients & Partners', route: '/about/partners' },
-            { icon: '📅', label: 'Over The Years', route: '/about/timeline' },
+            { icon: 'handshake', iconType: 'svg', label: 'Clients & Partners', route: '/about/partners' },
+            { icon: 'calendar', iconType: 'svg', label: 'Over The Years', route: '/about/timeline' },
           ],
         },
       ],
@@ -58,54 +61,25 @@ export class Navbar {
         {
           title: 'Consulting',
           links: [
-            { icon: '🏆', label: 'Tournament Consulting', route: '/offer/tournaments' },
-            { icon: '📝', label: 'Content & Marketing', route: '/offer/content' },
-            { icon: '🎙', label: 'Interviews & Podcast', route: '/offer/podcast' },
+            { icon: 'champions', iconType: 'svg', label: 'Tournament Consulting', route: '/offer/tournaments' },
+            { icon: 'speaker', iconType: 'svg', label: 'Content & Marketing', route: '/offer/content' },
+            { icon: 'podcast', iconType: 'svg', label: 'Interviews & Podcast', route: '/offer/podcast' },
           ],
         },
         {
           title: 'Events & Media',
           links: [
-            { icon: '🎪', label: 'Hosting / Anchor Events', route: '/offer/events' },
-            { icon: '🎓', label: 'Workshops', route: '/offer/workshops' },
-            { icon: '🎬', label: 'Media Services', route: '/offer/media' },
+            { icon: 'calendar', iconType: 'svg', label: 'Events Host and Anchor', route: '/offer/events' },
+            { icon: 'workshop', iconType: 'svg', label: 'Workshops', route: '/offer/workshops' },
+            { icon: 'media', iconType: 'svg', label: 'Media Services', route: '/offer/media' },
           ],
         },
         {
           title: 'Connections',
           links: [
-            { icon: '📢', label: 'Influencer', route: '/offer/influencer' },
-            { icon: '⭐', label: 'Chess Celebrity Connect', route: '/offer/celebrity' },
-            { icon: '📱', label: 'Chess Social Media Channels', route: '/offer/social-media' },
-          ],
-        },
-      ],
-    },
-    {
-      label: 'Everything Chess',
-      cols: 'grid-cols-3',
-      sections: [
-        {
-          title: 'Compete',
-          links: [
-            { icon: '♟', label: 'Chess Tournaments', route: '/chess/tournaments' },
-            { icon: '📈', label: 'Chess Rankings', route: '/chess/rankings' },
-            { icon: '👤', label: 'Chess Players Rankings', route: '/chess/players' },
-          ],
-        },
-        {
-          title: 'Explore',
-          links: [
-            { icon: '🌐', label: 'Chess Websites', route: '/chess/websites' },
-            { icon: '💻', label: 'Chess Online', route: '/chess/online' },
-            { icon: '📰', label: 'Chess Magazines', route: '/chess/magazines' },
-          ],
-        },
-        {
-          title: 'Community',
-          links: [
-            { icon: '🏠', label: 'Chess Clubs', route: '/chess/clubs' },
-            { icon: '♜', label: 'Chess Sets', route: '/chess/sets' },
+            { icon: 'speaker', iconType: 'svg', label: 'Influencer', route: '/offer/influencer' },
+            { icon: 'stars', iconType: 'svg', label: 'Chess Celebrity Connect', route: '/offer/celebrity' },
+            { icon: 'social', iconType: 'svg', label: 'Chess Social Media Channels', route: '/offer/social-media' },
           ],
         },
       ],
@@ -117,47 +91,27 @@ export class Navbar {
         {
           title: 'News',
           links: [
-            { icon: '📰', label: 'Breaking News', route: '/hot/news' },
+            { icon: 'media', iconType: 'svg', label: 'Breaking News', route: '/hot/news' },
           ],
         },
         {
           title: 'Content',
           links: [
-            { icon: '📝', label: 'Blogs', route: '/hot/blogs' },
-            { icon: '🎙', label: 'Podcast', route: '/hot/podcast' },
+            { icon: 'work', iconType: 'svg', label: 'Blogs', route: '/hot/blogs' },
+            { icon: 'podcast', iconType: 'svg', label: 'Podcast', route: '/hot/podcast' },
           ],
         },
         {
           title: 'Happenings',
           links: [
-            { icon: '🎉', label: 'Events', route: '/hot/events' },
+            { icon: 'calendar', iconType: 'svg', label: 'Events', route: '/hot/events' },
           ],
         },
       ],
     },
     {
       label: 'Contact Us',
-      cols: 'grid-cols-3',
-      sections: [
-        {
-          title: 'Reach Out',
-          links: [
-            { icon: '📬', label: 'Inquiry / Feedback Form', route: '/contact/inquiry' },
-          ],
-        },
-        {
-          title: 'Connect',
-          links: [
-            { icon: '🔗', label: 'Social Media Links', route: '/contact/social' },
-          ],
-        },
-        {
-          title: 'Request',
-          links: [
-            { icon: '♟', label: 'Finally Anything in Chess!', route: '/contact/request' },
-          ],
-        },
-      ],
+      route: '/contact/inquiry',
     },
   ];
 
@@ -165,8 +119,11 @@ export class Navbar {
     return `bg-gradient-to-r from-gray-950 via-gray-900 to-gray-950 dark:bg-none dark:bg-white text-white dark:text-gray-900 border border-gray-800 dark:border-gray-200 shadow-lg shadow-black/20 dark:shadow-black/5 transition-colors duration-200 ${this.radius.md}`;
   }
 
-  get homeLinkClasses(): string {
-    return `px-5 py-2 text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100 transition-all inline-block ${this.radius.md}`;
+  homeLinkClasses(route?: string): string {
+    const isActive = route && this._router.url === route;
+    const active = 'text-white dark:text-gray-900 bg-white/30 dark:bg-gray-200';
+    const inactive = 'text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100';
+    return `px-5 py-2 transition-all inline-block ${isActive ? active : inactive} ${this.radius.md}`;
   }
 
   get themeToggleLabel(): string {
@@ -182,10 +139,19 @@ export class Navbar {
   }
 
   menuButtonClasses(label: string): string {
-    const active = 'text-white dark:text-gray-900 bg-white/15 dark:bg-gray-100';
+    const isOpen = this.activeMenu() === label;
+    const isActive = this._isMenuActive(label);
+    const active = 'text-white dark:text-gray-900 bg-white/30 dark:bg-gray-200';
     const inactive = 'text-gray-300 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 hover:bg-white/10 dark:hover:bg-gray-100';
-    const state = this.activeMenu() === label ? active : inactive;
+    const state = isOpen || isActive ? active : inactive;
     return `px-5 py-2 transition-all cursor-pointer flex items-center gap-1 ${state} ${this.radius.md}`;
+  }
+
+  private _isMenuActive(label: string): boolean {
+    const url = this._router.url;
+    const menu = this.navMenus.find(m => m.label === label);
+    if (!menu?.sections) return false;
+    return menu.sections.some(s => s.links.some(l => url.startsWith(l.route)));
   }
 
   chevronClasses(label: string): string {
@@ -218,5 +184,10 @@ export class Navbar {
 
   isExternal(route: string): boolean {
     return route.startsWith('http');
+  }
+
+  navIcon(icon: string): string {
+    const prefix = this.themeService.isDark() ? 'black' : 'white';
+    return `assets/navbar-icons/${prefix}-${icon}.svg`;
   }
 }

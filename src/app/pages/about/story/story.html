@@ -1,0 +1,48 @@
+<!-- Hero -->
+<section class="relative overflow-hidden py-24">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight">
+      How it All <span class="text-gradient-shimmer">Started</span>
+    </h1>
+    <p class="mt-6 text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+      From a small passion project to a global chess community — here's my story.
+    </p>
+  </div>
+</section>
+
+<!-- Story Timeline -->
+<section class="py-16">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="relative border-l-2 border-amber-500 ml-4 md:ml-8 space-y-12">
+      @for (chapter of chapters; track chapter.year) {
+        <div class="relative pl-8">
+          <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-amber-500 border-4 border-white dark:border-gray-900 shadow"></div>
+          <span class="text-sm font-bold text-amber-500">{{ chapter.year }}</span>
+          <h2 class="text-xl font-bold text-gray-900 dark:text-white mt-1">{{ chapter.title }}</h2>
+          <p class="text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">{{ chapter.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Quote Section -->
+<section class="bg-gray-50 dark:bg-gray-800/50 py-20 transition-colors duration-200">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <blockquote class="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white italic">
+      "Every chess master was once a beginner."
+    </blockquote>
+    <p class="mt-4 text-gray-500 dark:text-gray-400">— Irving Chernev</p>
+  </div>
+</section>
+
+<!-- Vision -->
+<section class="py-20">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Where We're <span class="text-gradient-shimmer">Headed</span></h2>
+    <p class="mt-6 text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+      Our mission is to make chess accessible to everyone — whether you're a casual player or an aspiring grandmaster.
+      We're building a platform that combines the beauty of chess with the power of AI to help players grow, compete, and connect across the globe.
+    </p>
+  </div>
+</section>

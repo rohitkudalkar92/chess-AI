@@ -1,0 +1,54 @@
+@if (blog) {
+  <article class="min-h-screen py-24">
+    <div class="max-w-3xl mx-auto px-4">
+
+      <!-- Back link -->
+      <a routerLink="/hot/blogs" class="inline-flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-amber-500 transition-colors mb-8">
+        ← Back to Blogs
+      </a>
+
+      <!-- Hero image -->
+      <div class="w-full h-64 md:h-96 overflow-hidden mb-8" [class]="radius.md">
+        <img [src]="blog.image" [alt]="blog.title" class="w-full h-full object-cover" />
+      </div>
+
+      <!-- Meta -->
+      <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
+        <span class="bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 px-2.5 py-0.5 rounded-full font-medium text-xs">{{ blog.category }}</span>
+        <span>{{ blog.author }}</span>
+        <span>·</span>
+        <span>{{ blog.date }}</span>
+        <span>·</span>
+        <span>{{ blog.readTime }}</span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6">{{ blog.title }}</h1>
+
+      <!-- Content -->
+      <div class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed space-y-6">
+        <p>{{ blog.excerpt }}</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.</p>
+        <p>Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue.</p>
+      </div>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 mt-8">
+        @for (tag of blog.tags; track tag) {
+          <span class="text-sm text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">{{ tag }}</span>
+        }
+      </div>
+
+    </div>
+  </article>
+} @else {
+  <section class="min-h-screen py-24">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Blog Not Found</h1>
+      <p class="text-gray-500 dark:text-gray-400 mb-8">The blog post you're looking for doesn't exist.</p>
+      <a routerLink="/hot/blogs" class="text-amber-500 hover:text-amber-400 font-medium">← Back to Blogs</a>
+    </div>
+  </section>
+}

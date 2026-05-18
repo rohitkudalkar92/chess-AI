@@ -1,5 +1,6 @@
 export interface NavLink {
   icon: string;
+  iconType?: 'svg' | 'emoji';
   label: string;
   route: string;
   hoverClass?: string;

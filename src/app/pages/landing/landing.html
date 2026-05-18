@@ -3,11 +3,11 @@
   <div class="max-w-7xl mx-auto px-4 pt-24 pb-32 flex flex-col items-center text-center">
     <span class="text-7xl mb-6">♚</span>
     <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
-      Master Chess with
-      <span class="text-gradient-shimmer">AI</span>
+      {{ texts.hero.title }}
+      <span class="text-gradient-shimmer">{{ texts.hero.highlight }}</span>
     </h1>
     <p class="mt-6 text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-2xl">
-      Play against intelligent opponents, learn winning strategies, and sharpen your skills — all in your browser.
+      {{ texts.hero.subtitle }}
     </p>
     <div class="mt-10 flex gap-4">
       <a routerLink="/play/vs-ai">
@@ -24,40 +24,88 @@
   <div class="absolute bottom-10 right-10 text-9xl opacity-5 dark:opacity-[0.03] select-none pointer-events-none" aria-hidden="true">♞</div>
 </section>
 
-<!-- Features Section -->
+
+<!-- Bento Box Section -->
 <section class="bg-gray-50 dark:bg-gray-800/50 py-24 transition-colors duration-200">
   <div class="max-w-7xl mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Why Play Here?</h2>
-      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Everything you need to play, learn, and master chess — powered by AI.</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Explore Upcoming Events</h2>
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Discover everything our platform has to offer.</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      @for (feature of features; track feature.title) {
-        <article class="bg-white dark:bg-gray-900 p-8 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-shadow duration-200" [class]="radius.md">
-          <span class="text-4xl block mb-4">{{ feature.icon }}</span>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{{ feature.title }}</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{ feature.description }}</p>
-        </article>
-      }
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[300px]">
+      <!-- Left: Daily Puzzles spanning 2 cols, 1 row -->
+      <a routerLink="/play/puzzles" [class]="'group relative overflow-hidden border border-gray-200 dark:border-gray-700 p-6 flex flex-col justify-end shadow-sm hover:shadow-lg transition-shadow duration-200 col-span-2 row-span-1 ' + radius.md">
+        <img src="assets/landingpage/gukesh-vs-magnus.jpg" alt="" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-110" loading="lazy" aria-hidden="true" />
+        <div class="absolute inset-0 bg-black/50 transition-opacity duration-200 group-hover:bg-black/30"></div>
+        <div class="relative z-10">
+          <h3 class="text-lg font-semibold text-white text-gradient-shimmer">Gukesh vs Magnus</h3>
+          <p class="text-sm mt-1 text-gray-200">The battle that shook the chess world</p>
+        </div>
+      </a>
+
+      <!-- Right: Opening Library spanning 1 col, 2 rows -->
+      <a routerLink="/learn/openings" [class]="'group relative overflow-hidden border border-gray-200 dark:border-gray-700 p-6 flex flex-col justify-end shadow-sm hover:shadow-lg transition-shadow duration-200 col-span-1 row-span-2 ' + radius.md">
+        <img src="assets/landingpage/chesss-uppcoming-events.jpg" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" aria-hidden="true" />
+        <div class="absolute inset-0 bg-black/40 transition-opacity duration-200 group-hover:bg-black/20"></div>
+        <div class="relative z-10">
+          <h3 class="text-lg font-semibold text-white text-gradient-shimmer">Upcoming Events</h3>
+          <p class="text-sm mt-1 text-gray-200">Stay updated with our latest chess tournaments and meetups.</p>
+        </div>
+      </a>
+
+      <!-- Bottom left: Norway Chess -->
+      <a routerLink="/hot/events" [class]="'group relative overflow-hidden border border-gray-200 dark:border-gray-700 p-6 flex flex-col justify-end shadow-sm hover:shadow-lg transition-shadow duration-200 col-span-1 row-span-1 ' + radius.md">
+        <img src="assets/landingpage/norway-chess.png" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" aria-hidden="true" />
+        <div class="absolute inset-0 bg-black/50 transition-opacity duration-200 group-hover:bg-black/30"></div>
+        <div class="relative z-10">
+          <h3 class="text-lg font-semibold text-white text-gradient-shimmer">Norway Chess 2025</h3>
+          <p class="text-sm mt-1 text-gray-200">Elite grandmaster tournament.</p>
+        </div>
+      </a>
+
+      <!-- Bottom right: Workshops -->
+      <a routerLink="/offer/workshops" [class]="'group relative overflow-hidden border border-gray-200 dark:border-gray-700 p-6 flex flex-col justify-end shadow-sm hover:shadow-lg transition-shadow duration-200 col-span-1 row-span-1 ' + radius.md">
+        <img src="assets/landingpage/chess-workshop.jpg" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" aria-hidden="true" />
+        <div class="absolute inset-0 bg-black/50 transition-opacity duration-200 group-hover:bg-black/30"></div>
+        <div class="relative z-10">
+          <h3 class="text-lg font-semibold text-white text-gradient-shimmer">Chess Workshops</h3>
+          <p class="text-sm mt-1 text-gray-200">Learn from the best.</p>
+        </div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- How It Works Section -->
+<!-- Timeline Section -->
 <section class="py-24">
   <div class="max-w-7xl mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">How It Works</h2>
-      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Get started in three simple steps.</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Our <span class="text-gradient-shimmer">Journey</span></h2>
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Key milestones that shaped who we are today.</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      @for (step of steps; track step.number) {
-        <article class="relative text-center p-8">
-          <span class="text-6xl font-black text-gradient-shimmer block mb-2">{{ step.number }}</span>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{{ step.title }}</h3>
-          <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{ step.description }}</p>
-        </article>
-      }
+    <div class="relative">
+      <!-- Horizontal line -->
+      <div class="absolute top-5 left-0 right-0 h-0.5 bg-gray-200 dark:bg-gray-700"></div>
+      <div class="flex gap-8 overflow-x-hidden pb-4" #timeline>
+        <div class="flex gap-8 animate-scroll-left">
+          @for (milestone of milestones; track milestone.year + milestone.title) {
+            <div class="relative flex flex-col items-center text-center pt-10 min-w-[140px] flex-shrink-0">
+              <div class="absolute top-2.5 w-5 h-5 rounded-full bg-amber-500 border-4 border-white dark:border-gray-900 shadow"></div>
+              <span class="text-lg font-bold text-gradient-shimmer">{{ milestone.year }}</span>
+              <h3 class="text-sm font-semibold text-gray-900 dark:text-white mt-1">{{ milestone.title }}</h3>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ milestone.description }}</p>
+            </div>
+          }
+          @for (milestone of milestones; track milestone.year + milestone.title + 'dup') {
+            <div class="relative flex flex-col items-center text-center pt-10 min-w-[140px] flex-shrink-0">
+              <div class="absolute top-2.5 w-5 h-5 rounded-full bg-amber-500 border-4 border-white dark:border-gray-900 shadow"></div>
+              <span class="text-lg font-bold text-gradient-shimmer">{{ milestone.year }}</span>
+              <h3 class="text-sm font-semibold text-gray-900 dark:text-white mt-1">{{ milestone.title }}</h3>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ milestone.description }}</p>
+            </div>
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -66,20 +114,23 @@
 <section class="bg-gray-50 dark:bg-gray-800/50 py-24 transition-colors duration-200">
   <div class="max-w-7xl mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Our Locations</h2>
-      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">Find us across the globe.</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white"><span class="text-6xl font-black text-gradient-shimmer" #counter>0</span> Countries. One Passion.</h2>
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-xl mx-auto">We attend chess tournaments across the globe — and we're still expanding.</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      @for (location of locations; track location.city) {
-        <article class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-200" [class]="radius.md">
-          <iframe [src]="location.embedUrl" class="w-full h-56 border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" [title]="location.city + ' map'"></iframe>
-          <div class="p-4 text-center">
-            <span class="text-xl">📍</span>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ location.city }}</h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400">{{ location.country }}</p>
-          </div>
-        </article>
-      }
+    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm" [class]="radius.md">
+      <app-locations-map />
     </div>
+  </div>
+</section>
+
+<!-- Connect With Me Section -->
+<section class="py-24">
+  <div class="max-w-2xl mx-auto px-4 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Connect With <span class="text-gradient-shimmer">Me</span></h2>
+    <p class="mt-4 text-gray-500 dark:text-gray-400">Drop your email and I'll get back to you.</p>
+    <form class="mt-8 flex gap-3 max-w-md mx-auto">
+      <input type="email" placeholder="Your email address" class="flex-1 px-4 py-3 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 transition rounded-lg" />
+      <button type="submit" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-white font-semibold transition rounded-lg">Send</button>
+    </form>
   </div>
 </section>

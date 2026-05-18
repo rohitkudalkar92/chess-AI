@@ -1,0 +1,26 @@
+<section class="min-h-screen py-24">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <!-- Header -->
+    <div class="text-center mb-20">
+      
+      <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white">{{ texts.title }}</h1>
+      <p class="mt-4 text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+        {{ texts.subtitle }}
+      </p>
+    </div>
+
+    <!-- Clients Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      @for (client of clients; track client.logo) {
+        <article class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center justify-center gap-3 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300" [class]="radius.md">
+          <div class="w-full h-20 flex items-center justify-center">
+            <img [src]="client.logo" [alt]="client.name + ' logo'" class="max-h-16 max-w-full object-contain" />
+          </div>
+          <p class="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">{{ client.name }}</p>
+        </article>
+      }
+    </div>
+
+  </div>
+</section>

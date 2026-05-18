@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto px-4 mt-5 relative z-50">
+<div class="sticky top-0 z-[1000] max-w-7xl mx-auto px-4 pt-5">
   <nav [class]="navClasses">
 
     <!-- Top bar -->
@@ -6,12 +6,12 @@
 
       <!-- Logo -->
       <a routerLink="/" (click)="closeMenu()" class="flex items-center gap-2 group">
-        <span class="text-2xl">♚</span>
-        <span class="text-lg font-semibold tracking-wide text-gray-100 dark:text-gray-600 group-hover:text-gray-50 dark:group-hover:text-gray-500 transition">Chess AI</span>
+        <img src="assets/logo/logo.png" alt="Chess AI logo" class="h-12 w-12" />
+        <span class="text-lg font-semibold tracking-wide text-gray-100 dark:text-gray-600 group-hover:text-gray-50 dark:group-hover:text-gray-500 transition ml-4">{{ appName }}</span>
       </a>
 
       <!-- Nav Links -->
-      <ul class="flex gap-0 list-none m-0 p-0 text-sm font-medium">
+      <ul class="flex gap-1 list-none m-0 p-0 text-sm font-medium">
         @for (menu of navMenus; track menu.label) {
           <li>
             @if (menu.sections) {
@@ -22,7 +22,7 @@
                 </svg>
               </button>
             } @else {
-              <a [routerLink]="menu.route" (click)="closeMenu()" [class]="homeLinkClasses">{{ menu.label }}</a>
+              <a [routerLink]="menu.route" (click)="closeMenu()" [class]="homeLinkClasses(menu.route)">{{ menu.label }}</a>
             }
           </li>
         }
@@ -55,12 +55,20 @@
                     <li>
                       @if (isExternal(link.route)) {
                         <a [href]="link.route" target="_blank" (click)="closeMenu()" [class]="linkClasses(link.hoverClass)">
-                          <span class="text-lg">{{ link.icon }}</span>
+                          @if (link.iconType === 'svg') {
+                            <img [src]="navIcon(link.icon)" [alt]="link.label" class="w-5 h-5" />
+                          } @else {
+                            <span class="text-lg">{{ link.icon }}</span>
+                          }
                           <span>{{ link.label }}</span>
                         </a>
                       } @else {
                         <a [routerLink]="link.route" (click)="closeMenu()" [class]="linkClasses(link.hoverClass)">
-                          <span class="text-lg">{{ link.icon }}</span>
+                          @if (link.iconType === 'svg') {
+                            <img [src]="navIcon(link.icon)" [alt]="link.label" class="w-5 h-5" />
+                          } @else {
+                            <span class="text-lg">{{ link.icon }}</span>
+                          }
                           <span>{{ link.label }}</span>
                         </a>
                       }
